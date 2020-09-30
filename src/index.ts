@@ -1,26 +1,26 @@
 import Icon from "./components/icon/index";
 import Button from "./components/button/index";
 
-// // 布局组件
+// 布局组件
 // import Layout from "./components/layout/index";
-// import Header from "./components/header/index";
-// import Footer from "./components/footer/index";
-// import Aside from "./components/aside/index";
-// import Main from "./components/main/index";
-// import Row from "./components/row/index";
-// import Col from "./components/col/index";
+import Header from "./components/header/index";
+import Footer from "./components/footer/index";
+import Aside from "./components/aside/index";
+import Main from "./components/main/index";
+import Row from "./components/row/index";
+import Col from "./components/col/index";
 import Card from "./components/card/index";
-// import Divider from "./components/divider/index";
+import Divider from "./components/divider/index";
 // import CellGroup from "./components/cell-group/index";
 // import Cell from "./components/cell/index";
 // import Collapse from "./components/collapse/index";
 // import CollapseItem from "./components/collapse-item/index";
-// // 数据组件
+// 数据组件
 // import Table from "./components/table/index";
-// import Tag from "./components/tag/index";
-// import Progress from "./components/progress/index";
-// import Alert from "./components/alert/index";
-// // form组件
+import Tag from "./components/tag/index";
+import Progress from "./components/progress/index";
+import Alert from "./components/alert/index";
+// form组件
 // import Form from "./components/form/index";
 // import FormItem from "./components/form-item/index";
 // import Input from "./components/input/index";
@@ -34,12 +34,12 @@ import Card from "./components/card/index";
 // import Switch from "./components/switch/index";
 // import DatePicker from "./components/datepicker/index";
 // import Rate from "./components/rate/index";
-// // nav组件
-// import Breadcrumb from "./components/breadcrumb/index";
-// import BreadcrumbItem from "./components/breadcrumb-item/index";
+// nav组件
+import Breadcrumb from "./components/breadcrumb/index";
+import BreadcrumbItem from "./components/breadcrumb-item/index";
 // import Steps from "./components/steps/index";
 // import Step from "./components/step/index";
-// // 其它组件
+// 其它组件
 // import Timeline from "./components/timeline/index";
 // import TimelineItem from "./components/timeline-item/index";
 // import Tooltip from "./components/tooltip/index";
@@ -50,15 +50,14 @@ const components = [
     Icon,
     Button,
     // Layout,
-    // Header,
-    // Footer,
-    // Aside,
-    // Main,
-    // Button,
+    Header,
+    Footer,
+    Aside,
+    Main,
     Card,
-    // Divider,
-    // Row,
-    // Col,
+    Divider,
+    Row,
+    Col,
     // CellGroup,
     // Cell,
     // Collapse,
@@ -80,11 +79,11 @@ const components = [
     // Rate,
 
     // Table,
-    // Tag,
-    // Progress,
-    // Alert,
-    // Breadcrumb,
-    // BreadcrumbItem,
+    Tag,
+    Progress,
+    Alert,
+    Breadcrumb,
+    BreadcrumbItem,
 
     // Steps,
     // Step,
