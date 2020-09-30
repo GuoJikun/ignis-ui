@@ -17,7 +17,7 @@
     </button>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from "vue";
 import { prefix, oneOf } from "@/utils/assist";
 import insIcon from "@/components/icon";
@@ -29,7 +29,7 @@ export default defineComponent({
         type: {
             type: String,
             default: "default",
-            validator(value) {
+            validator(value: string): boolean {
                 const flag = oneOf(value, ["default", "primary", "success", "warning", "danger", "info", "text"]);
                 return flag;
             },
@@ -37,9 +37,9 @@ export default defineComponent({
         size: {
             type: String,
             default: "default",
-            validator(value) {
+            validator(value: string): boolean {
                 const types = ["default", "large", "small", "mini"];
-                return oneOf(types, value);
+                return oneOf(value, types);
             },
         },
         disabled: {
@@ -57,8 +57,8 @@ export default defineComponent({
         },
     },
     methods: {
-        handleClick(event) {
-            this.$emit("click", event);
+        handleClick(e: never): void {
+            this.$emit("click", e);
         },
     },
 });
