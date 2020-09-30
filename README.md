@@ -1,29 +1,19 @@
-# uikit
+# ins-design
 
-## Project setup
-```
-npm install
-```
+## 使用
 
-### Compiles and hot-reloads for development
-```
-npm run serve
+### 安装
+
+```bash
+yarn install ins-design
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+### 引用
 
-### Run your unit tests
-```
-npm run test:unit
-```
+```bash
+import Vue from 'vue'
+import foxDesign from 'ins-design';
+import 'ins-design/lib/ins-design.css';
 
-### Lints and fixes files
+Vue.use(foxDesign)
 ```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

@@ -1,0 +1,52 @@
+@import "./common/var.scss";
+.ins-form-item {
+    box-sizing: border-box;
+    margin-top: 22px;
+
+    &::after {
+        content: "";
+        display: table;
+    }
+
+    &-label {
+        text-align: right;
+        vertical-align: middle;
+        float: left;
+        font-size: 14px;
+        color: #606266;
+        line-height: 36px;
+        padding: 0 12px 0 0;
+        box-sizing: border-box;
+        &-left {
+            text-align: left;
+        }
+        &-right {
+            text-align: right;
+        }
+        &-top {
+            text-align: left;
+            display: block;
+        }
+    }
+
+    &-content {
+        display: inline-block;
+        min-width: 180px;
+        vertical-align: middle;
+        position: relative;
+        line-height: 36px;
+    }
+
+    &-message {
+        color: $ins--color-danger;
+        font-size: 12px;
+        line-height: 20px;
+        position: absolute;
+        bottom: -20px;
+        &::before,
+        &::after {
+            content: "";
+            display: table;
+        }
+    }
+}

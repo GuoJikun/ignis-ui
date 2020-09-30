@@ -1,4 +1,8 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 
-createApp(App).mount("#app");
+import insUI from "./index";
+
+const app = createApp(App);
+app.use(insUI);
+app.mount("#app");

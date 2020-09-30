@@ -1,0 +1,209 @@
+$ins-primary: #409eff;
+$ins-primary-disabled: #a0cfff;
+
+$ins-success: #67c23a;
+$ins-success-disabled: #b3e19d;
+$ins-danger: #f56c6c;
+$ins-danger-disabled: #fab6b6;
+$ins-warning: #e6a23c;
+$ins-warning-disabled: #f3d19e;
+$ins-info: #909399;
+$ins-info-disabled: #c8c9cc;
+
+$ins-disabled: #c0c4cc;
+
+$ins-black: #000000;
+$ins-white: #ffffff;
+
+$ins-transparent: transparent;
+$ins--color-transparent: transparent;
+
+$ins-border-color-default: #dcdfe6;
+$ins-border-color-second: #ebeef5;
+$ins-border-color-disabled: #ebeef5;
+
+/* Color
+-------------------------- */
+/// color|1|BrandColor|0
+/// color|1|BackgroundColor|4
+$ins--color-white: #ffffff !default;
+/// color|1|BackgroundColor|4
+$ins--color-black: #000000 !default;
+
+$ins--color-primary: #409eff !default;
+$ins--color-primary-light-1: mix($ins--color-white, $ins--color-primary, 10%) !default; /* 53a8ff */
+$ins--color-primary-light-2: mix($ins--color-white, $ins--color-primary, 20%) !default; /* 66b1ff */
+$ins--color-primary-light-3: mix($ins--color-white, $ins--color-primary, 30%) !default; /* 79bbff */
+$ins--color-primary-light-4: mix($ins--color-white, $ins--color-primary, 40%) !default; /* 8cc5ff */
+$ins--color-primary-light-5: mix($ins--color-white, $ins--color-primary, 50%) !default; /* a0cfff */
+$ins--color-primary-light-6: mix($ins--color-white, $ins--color-primary, 60%) !default; /* b3d8ff */
+$ins--color-primary-light-7: mix($ins--color-white, $ins--color-primary, 70%) !default; /* c6e2ff */
+$ins--color-primary-light-8: mix($ins--color-white, $ins--color-primary, 80%) !default; /* d9ecff */
+$ins--color-primary-light-9: mix($ins--color-white, $ins--color-primary, 90%) !default; /* ecf5ff */
+/// color|1|SecondaryColor|1
+$ins--color-success: #67c23a !default;
+$ins--color-success-light-1: mix($ins--color-white, $ins--color-success, 10%) !default; /* 53a8ff */
+$ins--color-success-light-2: mix($ins--color-white, $ins--color-success, 20%) !default; /* 66b1ff */
+$ins--color-success-light-3: mix($ins--color-white, $ins--color-success, 30%) !default; /* 79bbff */
+$ins--color-success-light-4: mix($ins--color-white, $ins--color-success, 40%) !default; /* 8cc5ff */
+$ins--color-success-light-5: mix($ins--color-white, $ins--color-success, 50%) !default; /* a0cfff */
+$ins--color-success-light-6: mix($ins--color-white, $ins--color-success, 60%) !default; /* b3d8ff */
+$ins--color-success-light-7: mix($ins--color-white, $ins--color-success, 70%) !default; /* c6e2ff */
+$ins--color-success-light-8: mix($ins--color-white, $ins--color-success, 80%) !default; /* d9ecff */
+$ins--color-success-light-9: mix($ins--color-white, $ins--color-success, 90%) !default; /* ecf5ff */
+/// color|1|SecondaryColor|1
+$ins--color-warning: #e6a23c !default;
+$ins--color-warning-light-1: mix($ins--color-white, $ins--color-warning, 10%) !default; /* 53a8ff */
+$ins--color-warning-light-2: mix($ins--color-white, $ins--color-warning, 20%) !default; /* 66b1ff */
+$ins--color-warning-light-3: mix($ins--color-white, $ins--color-warning, 30%) !default; /* 79bbff */
+$ins--color-warning-light-4: mix($ins--color-white, $ins--color-warning, 40%) !default; /* 8cc5ff */
+$ins--color-warning-light-5: mix($ins--color-white, $ins--color-warning, 50%) !default; /* a0cfff */
+$ins--color-warning-light-6: mix($ins--color-white, $ins--color-warning, 60%) !default; /* b3d8ff */
+$ins--color-warning-light-7: mix($ins--color-white, $ins--color-warning, 70%) !default; /* c6e2ff */
+$ins--color-warning-light-8: mix($ins--color-white, $ins--color-warning, 80%) !default; /* d9ecff */
+$ins--color-warning-light-9: mix($ins--color-white, $ins--color-warning, 90%) !default; /* ecf5ff */
+/// color|1|SecondaryColor|1
+$ins--color-danger: #f56c6c !default;
+$ins--color-danger-light-1: mix($ins--color-white, $ins--color-danger, 10%) !default; /* 53a8ff */
+$ins--color-danger-light-2: mix($ins--color-white, $ins--color-danger, 20%) !default; /* 66b1ff */
+$ins--color-danger-light-3: mix($ins--color-white, $ins--color-danger, 30%) !default; /* 79bbff */
+$ins--color-danger-light-4: mix($ins--color-white, $ins--color-danger, 40%) !default; /* 8cc5ff */
+$ins--color-danger-light-5: mix($ins--color-white, $ins--color-danger, 50%) !default; /* a0cfff */
+$ins--color-danger-light-6: mix($ins--color-white, $ins--color-danger, 60%) !default; /* b3d8ff */
+$ins--color-danger-light-7: mix($ins--color-white, $ins--color-danger, 70%) !default; /* c6e2ff */
+$ins--color-danger-light-8: mix($ins--color-white, $ins--color-danger, 80%) !default; /* d9ecff */
+$ins--color-danger-light-9: mix($ins--color-white, $ins--color-danger, 90%) !default; /* ecf5ff */
+/// color|1|SecondaryColor|1
+$ins--color-info: #909399 !default;
+$ins--color-info-light-1: mix($ins--color-white, $ins--color-info, 10%) !default; /* 53a8ff */
+$ins--color-info-light-2: mix($ins--color-white, $ins--color-info, 20%) !default; /* 66b1ff */
+$ins--color-info-light-3: mix($ins--color-white, $ins--color-info, 30%) !default; /* 79bbff */
+$ins--color-info-light-4: mix($ins--color-white, $ins--color-info, 40%) !default; /* 8cc5ff */
+$ins--color-info-light-5: mix($ins--color-white, $ins--color-info, 50%) !default; /* a0cfff */
+$ins--color-info-light-6: mix($ins--color-white, $ins--color-info, 60%) !default; /* b3d8ff */
+$ins--color-info-light-7: mix($ins--color-white, $ins--color-info, 70%) !default; /* c6e2ff */
+$ins--color-info-light-8: mix($ins--color-white, $ins--color-info, 80%) !default; /* d9ecff */
+$ins--color-info-light-9: mix($ins--color-white, $ins--color-info, 90%) !default; /* ecf5ff */
+
+$ins--color-success-light: mix($ins--color-white, $ins--color-success, 80%) !default;
+$ins--color-warning-light: mix($ins--color-white, $ins--color-warning, 80%) !default;
+$ins--color-danger-light: mix($ins--color-white, $ins--color-danger, 80%) !default;
+$ins--color-info-light: mix($ins--color-white, $ins--color-info, 80%) !default;
+
+$ins--color-success-lighter: mix($ins--color-white, $ins--color-success, 90%) !default;
+$ins--color-warning-lighter: mix($ins--color-white, $ins--color-warning, 90%) !default;
+$ins--color-danger-lighter: mix($ins--color-white, $ins--color-danger, 90%) !default;
+$ins--color-info-lighter: mix($ins--color-white, $ins--color-info, 90%) !default;
+
+/// color|1|FontColor|2
+$ins--color-text-primary: #303133 !default;
+/// color|1|FontColor|2
+$ins--color-text-regular: #606266 !default;
+/// color|1|FontColor|2
+$ins--color-text-secondary: #909399 !default;
+/// color|1|FontColor|2
+$ins--color-text-placeholder: #c0c4cc !default;
+/// color|1|BorderColor|3
+$ins--border-color-base: #dcdfe6 !default;
+/// color|1|BorderColor|3
+$ins--border-color-light: #e4e7ed !default;
+/// color|1|BorderColor|3
+$ins--border-color-lighter: #ebeef5 !default;
+/// color|1|BorderColor|3
+$ins--border-color-extra-light: #f2f6fc !default;
+
+/* Transition
+-------------------------- */
+$ins--all-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1) !default;
+$ins--fade-transition: opacity 300ms cubic-bezier(0.23, 1, 0.32, 1) !default;
+$ins--fade-linear-transition: opacity 200ms linear !default;
+$ins--md-fade-transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1), opacity 300ms cubic-bezier(0.23, 1, 0.32, 1) !default;
+$ins--border-transition-base: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) !default;
+$ins--color-transition-base: color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) !default;
+
+/* Typography font
+-------------------------- */
+$ins--font-path: "fonts" !default;
+/// fontSize|1|FontSize|0   暂未使用
+$ins--font-size-extra-large: 20px !default;
+/// fontSize|1|FontSize|0
+$ins--font-size-large: 18px !default;
+/// fontSize|1|FontSize|0
+$ins--font-size-medium: 16px !default;
+/// fontSize|1|FontSize|0
+$ins--font-size-base: 14px !default;
+/// fontSize|1|FontSize|0
+$ins--font-size-small: 13px !default;
+/// fontSize|1|FontSize|0
+$ins--font-size-extra-small: 12px !default;
+/// fontWeight|1|FontWeight|1
+$ins--font-weight-primary: 500 !default;
+/// fontWeight|1|FontWeight|1
+$ins--font-weight-secondary: 100 !default;
+/// fontLineHeight|1|LineHeight|2
+$ins--font-line-height-primary: 24px !default;
+/// fontLineHeight|1|LineHeight|2
+$ins--font-line-height-secondary: 16px !default;
+$ins--font-color-disabled-base: #bbb !default;
+/* Size
+-------------------------- */
+$ins--size-base: 14px !default;
+
+/* z-index
+-------------------------- */
+$ins--index-normal: 1 !default;
+$ins--index-top: 1000 !default;
+$ins--index-popper: 2000 !default;
+
+// Box-shadow
+/// boxShadow|1|Shadow|1
+$--box-shadow-base: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04) !default;
+// boxShadow|1|Shadow|1
+$--box-shadow-dark: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.12) !default;
+/// boxShadow|1|Shadow|1
+$--box-shadow-light: 0 2px 12px 0 rgba(0, 0, 0, 0.1) !default;
+
+/* Icon
+-------------------------- */
+$ins--icon-color: #666 !default;
+$ins--icon-color-base: $ins--color-info !default;
+
+/* Timeline
+--------------------------*/
+$ins--timeline-node-size-normal: 12px !default;
+$ins--timeline-node-size-large: 14px !default;
+$ins--timeline-node-color: $ins--border-color-light !default;
+
+/* Divider
+--------------------------*/
+$ins--divider-font-size-base: $ins--font-size-base;
+$ins--timeline-font-size-small: 12px !default;
+$ins--timeline-font-color-base: $ins--color-text-primary;
+$ins--timeline-border-style-base: solid !default;
+$ins--timeline-border-color-base: $ins--border-color-light;
+$ins--timeline-background-color-base: $ins--border-color-light;
+
+/* Tree
+--------------------------*/
+
+/* Select
+--------------------------*/
+$ins--select-option-hoer: #f5f6f7;
+
+/* Table
+--------------------------*/
+$ins--border-color: $ins-border-color-default;
+$ins--header-font-color: $ins--color-text-primary;
+$ins--body-font-color: $ins--color-text-regular;
+
+/* radio 单选框
+--------------------------*/
+$ins--radio-text-color-disabled: $ins--color-text-placeholder !default;
+$ins--radio-background-color-disabled: $ins--border-color-extra-light !default;
+$ins--radio-border-color: $ins--border-color-base !default;
+
+/* checkbox 复选框
+--------------------------*/
+$ins--checkbox-text-color-disabled: $ins--color-text-placeholder !default;
+$ins--checkbox-background-color-disabled: $ins--border-color-extra-light !default;
+$ins--checkbox-border-color: $ins--border-color-base !default;

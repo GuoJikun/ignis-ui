@@ -1,0 +1,84 @@
+@import "./common/var.scss";
+.ins-input-number {
+    position: relative;
+    display: inline-block;
+    width: 160px;
+    line-height: 34px;
+    box-sizing: border-box;
+
+    &__decrease,
+    &__increase {
+        display: inline-block;
+        width: 33px;
+        position: absolute;
+        right: 1px;
+        top: 1px;
+        height: 32px;
+        text-align: center;
+        background: #f5f7fa;
+        color: #606266;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 300;
+        z-index: 1;
+        box-sizing: border-box;
+    }
+    &__decrease {
+        left: 1px;
+        border-radius: 4px 0 0 4px;
+        border-right: 1px solid #dcdfe6;
+    }
+    &__increase {
+        border-radius: 0 4px 4px 0;
+        border-left: 1px solid #dcdfe6;
+    }
+    .ins-input__inner {
+        padding: 0 34px;
+        text-align: center;
+        width: 160px;
+    }
+
+    &.is-disabled {
+        .ins-input-number__increase,
+        .ins-input-number__decrease {
+            border-color: #e4e7ed;
+            color: #e4e7ed;
+            cursor: not-allowed;
+        }
+    }
+}
+.ins-input-number--large {
+    width: 200px;
+    line-height: 38px;
+    .ins-input-number__decrease,
+    .ins-input-number__increase {
+        width: 40px;
+    }
+    .ins-input__inner {
+        padding: 0 48px;
+    }
+}
+
+.ins-input-number--small {
+    width: 160px;
+    line-height: 30px;
+    .ins-input-number__decrease,
+    .ins-input-number__increase {
+        width: 32px;
+    }
+    .ins-input__inner {
+        padding: 0 40px;
+    }
+}
+
+.ins-input-number--mini {
+    width: 140px;
+    line-height: 26px;
+    .ins-input-number__decrease,
+    .ins-input-number__increase {
+        width: 28px;
+    }
+    .ins-input__inner {
+        padding: 0 36px;
+    }
+}

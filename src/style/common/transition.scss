@@ -1,0 +1,109 @@
+@import "var";
+
+.fade-in-linear-enter-active,
+.fade-in-linear-leave-active {
+    transition: $ins--fade-linear-transition;
+}
+
+.fade-in-linear-enter,
+.fade-in-linear-leave,
+.fade-in-linear-leave-active {
+    opacity: 0;
+}
+
+.ins-fade-in-linear-enter-active,
+.ins-fade-in-linear-leave-active {
+    transition: $ins--fade-linear-transition;
+}
+
+.ins-fade-in-linear-enter,
+.ins-fade-in-linear-leave,
+.ins-fade-in-linear-leave-active {
+    opacity: 0;
+}
+
+.ins-fade-in-enter-active,
+.ins-fade-in-leave-active {
+    transition: all 0.3s cubic-bezier(0.55, 0, 0.1, 1);
+}
+
+.ins-fade-in-enter,
+.ins-fade-in-leave-active {
+    opacity: 0;
+}
+
+.ins-zoom-in-center-enter-active,
+.ins-zoom-in-center-leave-active {
+    transition: all 0.3s cubic-bezier(0.55, 0, 0.1, 1);
+}
+
+.ins-zoom-in-center-enter,
+.ins-zoom-in-center-leave-active {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.ins-zoom-in-top-enter-active,
+.ins-zoom-in-top-leave-active {
+    opacity: 1;
+    transform: scaleY(1);
+    transition: $ins--md-fade-transition;
+    transform-origin: center top;
+}
+
+.ins-zoom-in-top-enter,
+.ins-zoom-in-top-leave-active {
+    opacity: 0;
+    transform: scaleY(0);
+}
+
+.ins-zoom-in-bottom-enter-active,
+.ins-zoom-in-bottom-leave-active {
+    opacity: 1;
+    transform: scaleY(1);
+    transition: $ins--md-fade-transition;
+    transform-origin: center bottom;
+}
+
+.ins-zoom-in-bottom-enter,
+.ins-zoom-in-bottom-leave-active {
+    opacity: 0;
+    transform: scaleY(0);
+}
+
+.ins-zoom-in-left-enter-active,
+.ins-zoom-in-left-leave-active {
+    opacity: 1;
+    transform: scale(1, 1);
+    transition: $ins--md-fade-transition;
+    transform-origin: top left;
+}
+
+.ins-zoom-in-left-enter,
+.ins-zoom-in-left-leave-active {
+    opacity: 0;
+    transform: scale(0.45, 0.45);
+}
+
+.collapse-transition {
+    transition: 0.3s height ease-in-out, 0.3s padding-top ease-in-out, 0.3s padding-bottom ease-in-out;
+}
+
+.horizontal-collapse-transition {
+    transition: 0.3s width ease-in-out, 0.3s padding-left ease-in-out, 0.3s padding-right ease-in-out;
+}
+
+.ins-list-enter-active,
+.ins-list-leave-active {
+    transition: all 1s;
+}
+
+.ins-list-enter,
+.ins-list-leave-active {
+    opacity: 0;
+    transform: translateY(-30px);
+}
+
+.ins-opacity-transition {
+    transition: opacity 0.3s cubic-bezier(0.55, 0, 0.1, 1);
+}

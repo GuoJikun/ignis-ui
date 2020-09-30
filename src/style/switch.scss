@@ -1,0 +1,54 @@
+@import "./common/var.scss";
+
+.ins-switch {
+    display: inline-block;
+    box-sizing: border-box;
+    &__core {
+        margin: 0;
+        display: inline-block;
+        position: relative;
+        width: 44px;
+        height: 22px;
+        line-height: 22px;
+        border: 1px solid #ccc;
+        background-color: #ccc;
+        outline: none;
+        border-radius: 11px;
+        box-sizing: border-box;
+        cursor: pointer;
+        transition: border-color 0.3s, background-color 0.3s;
+        vertical-align: middle;
+        font-size: 12px;
+        text-align: right;
+        padding: 0 4px;
+        color: #fff;
+        &:after {
+            content: "";
+            position: absolute;
+            top: 1px;
+            left: 1px;
+            border-radius: 100%;
+            transition: all 0.3s;
+            width: 18px;
+            height: 18px;
+            background-color: #fff;
+        }
+    }
+}
+.is-checked {
+    .ins-switch__core {
+        border-color: #409eff;
+        background-color: #409eff;
+        text-align: left;
+        &:after {
+            left: 100%;
+            margin-left: -19px;
+        }
+    }
+}
+.is-disabled {
+    opacity: 0.6;
+    .ins-switch__core {
+        cursor: not-allowed;
+    }
+}

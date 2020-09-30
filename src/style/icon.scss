@@ -1,0 +1,13 @@
+@import "icon/icon.scss";
+.ins-icon {
+    display: inline-block;
+}
+.is-spin {
+    transition: 0.3s;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
