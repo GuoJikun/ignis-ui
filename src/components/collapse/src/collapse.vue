@@ -43,9 +43,6 @@ export default defineComponent({
             updateChildren,
         };
     },
-    mounted() {
-        console.log(this.childs, "$$$$$$$$$$$$");
-    },
     methods: {
         change(value: any) {
             this.$emit("change", value);

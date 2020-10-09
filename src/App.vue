@@ -16,9 +16,9 @@
             </div>
         </div>
         <div class="layout-item">
-            <p class="title">Card 卡片</p>
+            <p class="title">Button 按钮</p>
             <div class="layout-item-body">
-                <ins-button title="这是卡片标题">
+                <ins-button>
                     默认按钮
                 </ins-button>
             </div>
@@ -41,18 +41,35 @@
             <p class="title">Divider 分割线</p>
             <div class="layout-item-body">
                 <p>
-                    Phoronix Test Suite是一个知名的测试和基准测试平台，可用于Linux、Solaris、macOS、Windows 和 BSD
-                    系统的测试，套件内包含多种维度的测试组件。上个月刚发布了v10.0 Milestone 1版本，现在根据官网信息，近期有600
-                    个不同的基准测试配置文件引入该套件中。
+                    Phoronix Test
+                    Suite是一个知名的测试和基准测试平台，可用于Linux、Solaris、macOS、Windows 和 BSD
+                    系统的测试，套件内包含多种维度的测试组件。上个月刚发布了v10.0 Milestone
+                    1版本，现在根据官网信息，近期有600 个不同的基准测试配置文件引入该套件中。
                 </p>
                 <ins-divider>分割线在中间的样式</ins-divider>
                 <p>
                     2018年，蚂蚁集团开始全面转型云原生架构。2020
                     年，该集团又提出了“可信原生（Trust-Native）”的理念，将可信任性渗透到云原生架构的各层之中，打造全栈可信赖的云计算基础设施。
-                    而作为保护应用的运行安全的技术，机密计算理念以及可信执行环境TEE (Trusted Execution Environment)
-                    也被蚂蚁引入并积极实践，形成了 SOFAEnclave 机密计算技术栈。
+                    而作为保护应用的运行安全的技术，机密计算理念以及可信执行环境TEE (Trusted
+                    Execution Environment) 也被蚂蚁引入并积极实践，形成了 SOFAEnclave
+                    机密计算技术栈。
                 </p>
                 <ins-divider placement="left">分割线在左侧的样式</ins-divider>
+                <p>
+                    2018年，蚂蚁集团开始全面转型云原生架构。2020
+                    年，该集团又提出了“可信原生（Trust-Native）”的理念，将可信任性渗透到云原生架构的各层之中，打造全栈可信赖的云计算基础设施。
+                    而作为保护应用的运行安全的技术，机密计算理念以及可信执行环境TEE (Trusted
+                    Execution Environment) 也被蚂蚁引入并积极实践，形成了 SOFAEnclave
+                    机密计算技术栈。
+                </p>
+                <ins-divider placement="right">分割线在右侧的样式</ins-divider>
+                <p>
+                    2018年，蚂蚁集团开始全面转型云原生架构。2020
+                    年，该集团又提出了“可信原生（Trust-Native）”的理念，将可信任性渗透到云原生架构的各层之中，打造全栈可信赖的云计算基础设施。
+                    而作为保护应用的运行安全的技术，机密计算理念以及可信执行环境TEE (Trusted
+                    Execution Environment) 也被蚂蚁引入并积极实践，形成了 SOFAEnclave
+                    机密计算技术栈。
+                </p>
             </div>
         </div>
         <div class="layout-item">
@@ -86,6 +103,34 @@
                 <ins-progress :percentage="50"></ins-progress>
             </div>
         </div>
+        <div class="layout-item">
+            <p class="title">Collapse 折叠面板</p>
+            <div class="layout-item-body">
+                <ins-collapse v-model:value="value" @change="collapseChange">
+                    <ins-collapse-item title="史蒂夫·乔布斯">
+                        <div>
+                            史蒂夫·乔布斯（Steve Jobs），1955 年 2 月 24
+                            日生于美国加利福尼亚州旧金山，美国发明家、企业家、美国苹果公司联合创办人。
+                        </div>
+                    </ins-collapse-item>
+                    <ins-collapse-item title="盖瑞·沃兹尼亚克">
+                        <div>
+                            斯蒂夫·盖瑞·沃兹尼亚克（Stephen Gary
+                            Wozniak），美国电脑工程师，曾与史蒂夫·乔布斯合伙创立苹果电脑（今之苹果公司）。斯蒂夫·盖瑞·沃兹尼亚克曾就读于美国科罗拉多大学，后转学入美国著名高等学府加州大学伯克利分校（UC
+                            Berkeley）并获得电机工程及计算机（EECS）本科学位（1987 年）。
+                        </div>
+                    </ins-collapse-item>
+                    <ins-collapse-item title="乔纳森·伊夫">
+                        <div>
+                            乔纳森·伊夫是一位工业设计师，现任 Apple
+                            公司设计师兼资深副总裁，英国爵士。他曾参与设计了
+                            iPod，iMac，iPhone，iPad
+                            等众多苹果产品。除了乔布斯，他是对苹果那些著名的产品最有影响力的人。
+                        </div>
+                    </ins-collapse-item>
+                </ins-collapse>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -94,6 +139,26 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
     name: "App",
+    data() {
+        return {
+            test: true,
+            value: [],
+            value2: [],
+        };
+    },
+    methods: {
+        collapseChange(val: any) {
+            console.log(val, this.value);
+        },
+        showHide() {
+            console.log("test", this.test, 2);
+            if (this.test === true) {
+                this.test = false;
+            } else {
+                this.test = true;
+            }
+        },
+    },
 });
 </script>
 

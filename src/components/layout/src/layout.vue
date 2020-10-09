@@ -24,13 +24,19 @@ export default defineComponent({
                 return this.direction;
             }
             const slots = this.$slots;
+            console.log(slots, "slots");
             const children = slots.default || [];
 
-            const tmp = children.filter((cur: { componentOptions: { tag: string } | undefined }) => {
-                if (cur.componentOptions !== undefined) {
-                    return cur.componentOptions.tag == "ins-header" || cur.componentOptions.tag == "ins-footer";
+            const tmp = children.filter(
+                (cur: { componentOptions: { tag: string } | undefined }) => {
+                    if (cur.componentOptions !== undefined) {
+                        return (
+                            cur.componentOptions.tag == "ins-header" ||
+                            cur.componentOptions.tag == "ins-footer"
+                        );
+                    }
                 }
-            });
+            );
             if (tmp && tmp.length > 0) {
                 return "horizontal";
             } else {

@@ -52,7 +52,6 @@ export default defineComponent({
         };
     },
     mounted() {
-        console.log(this);
         this.init();
     },
     methods: {
@@ -76,10 +75,8 @@ export default defineComponent({
             } else {
                 if (value === undefined) value = [];
                 if (value.includes(this.getName)) {
-                    console.log(1);
                     value.splice(value.indexOf(this.getName), 1);
                 } else {
-                    console.log(2);
                     value.push(this.getName);
                 }
             }

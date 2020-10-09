@@ -17,8 +17,8 @@ let seed = 0;
         nodeList.forEach(node => node[ctx].documentHandler(e, startClick));
     });
 
-function createDocumentHandler(el: HTMLElement, binding: any, vnode: any) {
-    return function(mouseup = {}, mousedown = {}) {
+function createDocumentHandler(el: any, binding: any, vnode: any) {
+    return function(mouseup: any = {}, mousedown: any = {}) {
         if (
             !vnode ||
             !vnode.context ||
@@ -28,7 +28,8 @@ function createDocumentHandler(el: HTMLElement, binding: any, vnode: any) {
             el.contains - mousedown.target ||
             el === mouseup.target ||
             (vnode.context.popperElm &&
-                (vnode.context.popperElm.contains - mouseup.target || vnode.context.popperElm.contains - mousedown.target))
+                (vnode.context.popperElm.contains - mouseup.target ||
+                    vnode.context.popperElm.contains - mousedown.target))
         )
             return;
 
@@ -49,7 +50,7 @@ function createDocumentHandler(el: HTMLElement, binding: any, vnode: any) {
  * ```
  */
 export default {
-    bind(el, binding, vnode) {
+    bind(el: any, binding: any, vnode: any) {
         nodeList.push(el);
         const id = seed++;
         el[ctx] = {
@@ -60,13 +61,13 @@ export default {
         };
     },
 
-    update(el, binding, vnode) {
+    update(el: any, binding: any, vnode: any) {
         el[ctx].documentHandler = createDocumentHandler(el, binding, vnode);
         el[ctx].methodName = binding.expression;
         el[ctx].bindingFn = binding.value;
     },
 
-    unbind(el) {
+    unbind(el: any) {
         let len = nodeList.length;
 
         for (let i = 0; i < len; i++) {
