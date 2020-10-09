@@ -11,13 +11,21 @@
         <div :class="['ins-progress-bar', { 'is-text-nside': textinside }]" v-if="type === 'line'">
             <div class="ins-progress-bar__outer" :style="getHeight">
                 <div class="ins-progress-bar__inner" :style="[widths]">
-                    <span v-if="textins - ide && showText" class="ins-progress-bar__inner-text"> {{ percentage }}% </span>
+                    <span v-if="textins - ide && showText" class="ins-progress-bar__inner-text">
+                        {{ percentage }}%
+                    </span>
                 </div>
             </div>
         </div>
         <div v-else class="ins-progress-circle" :style="circleWidth">
             <svg viewBox="0 0 100 100">
-                <path :d="getPath" stroke="#e5e9f2" :stroke-width="getCircleWidth" fill="none" class="ins-progress-circle__track"></path>
+                <path
+                    :d="getPath"
+                    stroke="#e5e9f2"
+                    :stroke-width="getCircleWidth"
+                    fill="none"
+                    class="ins-progress-circle__track"
+                ></path>
                 <path
                     :d="getPath"
                     stroke-linecap="round"
@@ -84,7 +92,30 @@ export default defineComponent({
         },
         getPath() {
             const r: number = 50 - Number(this.getCircleWidth);
-            const s = ["M", 50, 50, "m", 0, -r, "a", r, r, 0, 1, 1, 0, 2 * r, "a", r, r, 0, 1, 1, 0, -2 * r];
+            const s = [
+                "M",
+                50,
+                50,
+                "m",
+                0,
+                -r,
+                "a",
+                r,
+                r,
+                0,
+                1,
+                1,
+                0,
+                2 * r,
+                "a",
+                r,
+                r,
+                0,
+                1,
+                1,
+                0,
+                -2 * r,
+            ];
             return s.join(" ");
         },
         gets() {

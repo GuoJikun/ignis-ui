@@ -1,9 +1,17 @@
 <template>
     <div
         class="ins-divider"
-        :class="[`ins-divider-${type}`, $slots.default ? `ins-divider-text-${placement}` : 'ins-divider-default', { 'is-dashed': dashed }]"
+        :class="[
+            `ins-divider-${type}`,
+            $slots.default ? `ins-divider-text-${placement}` : 'ins-divider-default',
+            { 'is-dashed': dashed },
+        ]"
     >
-        <span class="ins-divier-inner__text" :style="textStyle" v-if="type === 'horizontal' && $slots.default">
+        <span
+            class="ins-divier-inner__text"
+            :style="textStyle"
+            v-if="type === 'horizontal' && $slots.default"
+        >
             <slot></slot>
         </span>
     </div>

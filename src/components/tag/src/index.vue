@@ -1,6 +1,10 @@
 <template>
     <transition :name="transfer">
-        <span class="ins-tag" :class="['ins-tag--' + theme, `ins-tag--${theme}-${type}`, `ins-tag--${size}`]" @click="clicks">
+        <span
+            class="ins-tag"
+            :class="['ins-tag--' + theme, `ins-tag--${theme}-${type}`, `ins-tag--${size}`]"
+            @click="clicks"
+        >
             <slot></slot>
             <ins-icon class="ins-tag-close" name="x" v-if="closed" @click="close"> </ins-icon>
         </span>

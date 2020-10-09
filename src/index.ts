@@ -13,8 +13,8 @@ import Card from "./components/card/index";
 import Divider from "./components/divider/index";
 // import CellGroup from "./components/cell-group/index";
 // import Cell from "./components/cell/index";
-// import Collapse from "./components/collapse/index";
-// import CollapseItem from "./components/collapse-item/index";
+import Collapse from "./components/collapse/index";
+import CollapseItem from "./components/collapse-item/index";
 // 数据组件
 // import Table from "./components/table/index";
 import Tag from "./components/tag/index";
@@ -44,7 +44,7 @@ import BreadcrumbItem from "./components/breadcrumb-item/index";
 // import TimelineItem from "./components/timeline-item/index";
 // import Tooltip from "./components/tooltip/index";
 
-// import CollapseTransition from "@/utils/collapse-transition";
+import CollapseTransition from "./components/collapse-transition/index";
 
 const components = [
     Icon,
@@ -60,9 +60,9 @@ const components = [
     Col,
     // CellGroup,
     // Cell,
-    // Collapse,
-    // CollapseItem,
-    // CollapseTransition,
+    Collapse,
+    CollapseItem,
+    CollapseTransition,
 
     // Form,
     // FormItem,

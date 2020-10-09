@@ -1,6 +1,13 @@
 <template>
     <span class="ins-breadcrumb-item">
-        <component :is="isCom" :to="to" :replace="replace" :append="append" :target="target" class="ins-breadcrumb-item-text">
+        <component
+            :is="isCom"
+            :to="to"
+            :replace="replace"
+            :append="append"
+            :target="target"
+            class="ins-breadcrumb-item-text"
+        >
             <slot></slot>
         </component>
         <span class="ins-breadcrumb-item-symbol">{{ separator }}</span>

@@ -12,7 +12,13 @@
         ]"
         @click="handleClick"
     >
-        <ins-icon name="arrow-repeat" spin v-show="loading" size="14px" class="ins-button-loading"></ins-icon>
+        <ins-icon
+            name="arrow-repeat"
+            spin
+            v-show="loading"
+            size="14px"
+            class="ins-button-loading"
+        ></ins-icon>
         <slot></slot>
     </button>
 </template>
@@ -30,7 +36,15 @@ export default defineComponent({
             type: String,
             default: "default",
             validator(value: string): boolean {
-                const flag = oneOf(value, ["default", "primary", "success", "warning", "danger", "info", "text"]);
+                const flag = oneOf(value, [
+                    "default",
+                    "primary",
+                    "success",
+                    "warning",
+                    "danger",
+                    "info",
+                    "text",
+                ]);
                 return flag;
             },
         },
@@ -57,7 +71,7 @@ export default defineComponent({
         },
     },
     methods: {
-        handleClick(e: never): void {
+        handleClick(e: never) {
             this.$emit("click", e);
         },
     },

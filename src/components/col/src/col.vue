@@ -1,7 +1,11 @@
 <template>
     <component
         :is="tag"
-        :class="['ins-col', this.span ? `ins-col-${this.span}` : '', this.offset ? `ins-col-offset-${this.offset}` : '']"
+        :class="[
+            'ins-col',
+            this.span ? `ins-col-${this.span}` : '',
+            this.offset ? `ins-col-offset-${this.offset}` : '',
+        ]"
         :style="{
             paddingLeft: `${gutter / 2}px`,
             paddingRight: `${gutter / 2}px`,
