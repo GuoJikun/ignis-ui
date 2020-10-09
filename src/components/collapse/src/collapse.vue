@@ -4,29 +4,54 @@
     </div>
 </template>
 
-<script>
-import { prefix } from "@/utils/assist";
+<script lang="ts">
+import { defineComponent, PropType, ref } from "vue";
+import { prefix, oneOf } from "@/utils/assist";
 
-export default {
+export default defineComponent({
     name: `${prefix}Collapse`,
-    model: {
-        props: "value",
-        event: "change",
-    },
     props: {
         value: [String, Array],
         accordion: {
-            type: Boolean,
+            type: Boolean as PropType<boolean>,
             default: false,
         },
         arrow: {
-            type: String,
-            validator(value) {
-                return ["right", "none"].includes(value);
+            type: String as PropType<string>,
+            validator(value: string) {
+                return oneOf(value, ["right", "none"]);
             },
         },
     },
-};
+
+    provide() {
+        return {
+            accordion: this.accordion,
+            arrow: this.arrow,
+            activeItem: this.value,
+            change: this.change,
+            parent: this,
+        };
+    },
+    setup() {
+        const children = ref([]);
+        const updateChildren = (val: never) => {
+            children.value.push(val);
+        };
+        return {
+            childs: children,
+            updateChildren,
+        };
+    },
+    mounted() {
+        console.log(this.childs, "$$$$$$$$$$$$");
+    },
+    methods: {
+        change(value: any) {
+            this.$emit("change", value);
+        },
+    },
+});
 </script>
 <style lang="scss">
 .ins-collapse {

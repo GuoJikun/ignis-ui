@@ -1,101 +1,116 @@
 <template>
     <div class="ins-collapse-item" :class="[{ 'ins-collapse-item-active': isActive }]">
         <div class="ins-collapse-item__header" @click="handleChange">
-            <ins-icon name="chevron-right" :class="['ins-icon-right', `ins-collapse-arrow-${getArrow}`]"> </ins-icon>
-            <span>
+            <ins-icon
+                name="chevron-right"
+                :class="['ins-icon-right', getArrow ? `ins-collapse-arrow-${getArrow}` : '']"
+                size="14"
+            >
+            </ins-icon>
+            <span style="display:inline-block;">
                 <slot name="title">{{ title }}</slot>
             </span>
         </div>
-        <collapse-transition>
+        <ins-collapse-transition>
             <div v-show="isActive" class="ins-collapse-item__wrap">
                 <div class="ins-collapse-item__wrap-box">
                     <slot></slot>
                 </div>
             </div>
-        </collapse-transition>
+        </ins-collapse-transition>
     </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent, inject } from "vue";
 import { prefix } from "@/utils/assist";
-import { findBrothersComponents } from "@/utils/findComponent";
-import CollapseTransition from "@/utils/collapse-transition";
+import InsCollapseTransition from "@/components/collapse-transition/index";
 import InsIcon from "@/components/icon/index";
-export default {
+
+let uid = 0;
+
+export default defineComponent({
     name: `${prefix}CollapseItem`,
-    components: { InsIcon, CollapseTransition },
+    components: { InsIcon, InsCollapseTransition },
     props: {
-        value: [String, Array],
-        accordion: {
-            type: Boolean,
-            default: false,
-        },
         title: String,
         name: [String, Number],
     },
-
+    setup() {
+        const arrow = inject("arrow");
+        const accordion = inject("accordion");
+        const activeItem = inject("activeItem");
+        const change: any = inject("change");
+        const parent: any = inject("parent") || {};
+        return {
+            arrow,
+            accordion,
+            activeItem,
+            parent,
+            change,
+            uid: uid++,
+        };
+    },
     mounted() {
+        console.log(this);
         this.init();
     },
     methods: {
         init() {
-            const parent = this.$parent;
-            const flag = parent.$options.name !== "FoxCollapse";
+            const parent = this.$parent || { $options: { name: "" } };
+            const flag = parent.$options.name !== "InsCollapse";
             if (flag) {
-                throw new Error("ins-collapse-item组件的父组件必须是ins-collapse");
+                throw new Error("insCollapseItem组件的父组件必须是insCollapse");
+            } else {
+                this.parent.updateChildren(this.uid);
             }
         },
-        handleChange() {
-            const parent = this.$parent;
-            let value = parent.value;
-
-            if (parent.accordion) {
-                if (value == this.getName) {
+        handleChange(): void {
+            let value: any = this.activeItem;
+            if (this.accordion) {
+                if (value === this.getName) {
                     value = null;
                 } else {
                     value = this.getName.toString();
                 }
             } else {
-                if (value == undefined) value = [];
-                if (value.indexOf(this.getName) !== -1) {
+                if (value === undefined) value = [];
+                if (value.includes(this.getName)) {
+                    console.log(1);
                     value.splice(value.indexOf(this.getName), 1);
                 } else {
+                    console.log(2);
                     value.push(this.getName);
                 }
             }
-            parent.$emit("change", value);
+            this.parent.change(value);
         },
     },
     computed: {
-        getName() {
-            const uid = this._uid;
-            const borthers = findBrothersComponents(this, "CollapseItem", false);
-            const tmp = borthers.map(item => {
-                return item._uid;
-            });
-            const index = tmp.indexOf(uid);
-            return this.name || index;
+        getName(): any {
+            const uid = this.uid;
+            return this.name || uid;
         },
-        isActive() {
+        isActive(): boolean {
             let s = null;
-            const parent = this.$parent;
-            let value = this.$parent.value;
+            let value: any = this.activeItem;
             const name = this.getName;
-            if (parent.accordion) {
-                s = value == name;
+            if (this.accordion) {
+                s = value === name;
             } else {
-                value = value == undefined ? [] : this.$parent.value;
-                s = value.indexOf(name) !== -1;
+                value = value === undefined ? [] : this.activeItem;
+                s = value.includes(name);
             }
             return s;
         },
-        getArrow() {
-            const parent = this.$parent;
-            return parent.arrow;
+        getArrow(): any {
+            const arrow = this.arrow;
+            return arrow;
         },
     },
-};
+});
 </script>
+
 <style lang="scss">
 @import "@/style/common/var.scss";
 @import "@/style/common/transition.scss";
@@ -113,16 +128,18 @@ export default {
         position: relative;
         border-bottom: 1px solid transparent;
         font-size: 14px;
-        /* transition: all 0.3s ease-in-out; */
+        transition: all 0.3s ease-in-out;
         & > .ins-icon-right {
+            position: relative;
+            top: 1px;
             transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
-            margin-right: 10px;
+            margin-right: 8px;
         }
         & > .ins-icon-right.ins-collapse-arrow-right {
             position: absolute;
             right: 0;
             top: 50%;
-            margin-top: -7px;
+            margin-top: -8px;
             margin-right: 16px;
         }
         & > .ins-icon-right.ins-collapse-arrow-none {
@@ -135,9 +152,9 @@ export default {
         background-color: #fff;
         box-sizing: border-box;
         font-size: 13px;
-        /* will-change: height;
-        overflow: hidden; */
-        /* transition: all .3s; */
+        will-change: height;
+        overflow: hidden;
+        transition: all 0.3s;
         &-box {
             padding: 16px 0;
         }
