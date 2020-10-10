@@ -10,7 +10,6 @@
             { 'is-round': round },
             { 'is-loading': loading },
         ]"
-        @click="handleClick"
     >
         <ins-icon
             name="arrow-repeat"
@@ -68,11 +67,6 @@ export default defineComponent({
         loading: {
             type: Boolean,
             default: false,
-        },
-    },
-    methods: {
-        handleClick(e: never) {
-            this.$emit("click", e);
         },
     },
 });

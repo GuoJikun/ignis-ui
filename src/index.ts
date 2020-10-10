@@ -37,8 +37,8 @@ import Alert from "./components/alert/index";
 // nav组件
 import Breadcrumb from "./components/breadcrumb/index";
 import BreadcrumbItem from "./components/breadcrumb-item/index";
-// import Steps from "./components/steps/index";
-// import Step from "./components/step/index";
+import Steps from "./components/steps/index";
+import Step from "./components/step/index";
 // 其它组件
 import Timeline from "./components/timeline/index";
 import TimelineItem from "./components/timeline-item/index";
@@ -86,8 +86,8 @@ const components = [
     Breadcrumb,
     BreadcrumbItem,
 
-    // Steps,
-    // Step,
+    Steps,
+    Step,
 
     Timeline,
     TimelineItem,

@@ -44,6 +44,8 @@ Vue.use(foxDesign)
 -   Modal
 -   Timeline
 -   TimelineItem
+-   Steps
+-   Step
 
 ### 未完成组件
 
@@ -69,5 +71,3 @@ Vue.use(foxDesign)
 -   Tab
 -   Tree
 -   Pagination
--   Steps
--   Step

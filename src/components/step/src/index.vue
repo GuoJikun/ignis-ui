@@ -1,7 +1,12 @@
 <template>
     <div class="ins-step">
         <div class="ins-step__line">
-            <div :class="['ins-step__line-status', isFinish ? `ins-step__line-status-${getCurrStatus}` : '']"></div>
+            <div
+                :class="[
+                    'ins-step__line-status',
+                    isFinish ? `ins-step__line-status-${getCurrStatus}` : '',
+                ]"
+            ></div>
         </div>
         <div class="ins-step__icon">
             <div :class="['ins-step__icon-inner', `ins-step__icon-inner-${getCurrStatus}`]">
@@ -21,36 +26,40 @@
     </div>
 </template>
 
-<script>
-import { prefix } from "@/utils/assist.js";
-import { findComponentUpward } from "@/utils/findComponent.js";
-export default {
+<script lang="ts">
+import { prefix } from "@/utils/assist";
+import { defineComponent, inject, reactive, toRefs } from "vue";
+
+export default defineComponent({
     name: `${prefix}Step`,
     props: {
         title: String,
         status: {
             type: String,
-            validator(val) {
+            validator(val: string) {
                 const types = ["wait", "process", "finish", "error", "success"];
                 return types.includes(val);
             },
         },
         description: String,
     },
-    data() {
-        return {
+    setup() {
+        const timeline: any = inject("parent");
+        const data = reactive({
             index: 0,
             state: "wait",
+        });
+        const updateIndex = (i: number) => {
+            data.index = i;
         };
+        return { ...toRefs(data), updateIndex, timeline };
     },
-    methods: {
-        updateIndex(index) {
-            this.index = index;
-        },
+    mounted() {
+        this.timeline.appendChild(this);
     },
     computed: {
         getCurrIndex() {
-            const parent = findComponentUpward(this, "FoxSteps");
+            const parent = this.timeline;
             let active = 0;
             if (parent) {
                 active = parent.active;
@@ -58,7 +67,7 @@ export default {
             return active;
         },
         getCurrStatus() {
-            const parent = findComponentUpward(this, "FoxSteps");
+            const parent = this.timeline;
             let state = "wait";
             if (this.getCurrIndex > this.index) {
                 state = parent.finishStatus;
@@ -67,15 +76,22 @@ export default {
             } else {
                 state = "wait";
             }
+
             return state;
         },
-        isFinish() {
+        isFinish(): boolean {
             const flag = this.getCurrIndex > this.index;
             return flag;
         },
     },
-};
+    watch: {
+        getCurrIndex(val, val1) {
+            console.log(val, val1, "watch");
+        },
+    },
+});
 </script>
+
 <style lang="scss">
 @import "@/style/common/var.scss";
 .ins-step {

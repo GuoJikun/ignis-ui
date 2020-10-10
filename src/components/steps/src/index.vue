@@ -4,10 +4,11 @@
     </div>
 </template>
 
-<script>
-import { prefix } from "@/utils/assist.js";
-import { findComponentsDownward } from "@/utils/findComponent.js";
-export default {
+<script lang="ts">
+import { prefix } from "@/utils/assist";
+import { defineComponent, onMounted, ref } from "vue";
+
+export default defineComponent({
     name: `${prefix}Steps`,
     props: {
         active: {
@@ -17,7 +18,7 @@ export default {
         status: {
             type: String,
             default: "process",
-            validator(val) {
+            validator(val: string) {
                 const types = ["wait", "process", "finish", "error"];
                 return types.includes(val);
             },
@@ -25,7 +26,7 @@ export default {
         finishStatus: {
             type: String,
             default: "finish",
-            validator(val) {
+            validator(val: string) {
                 const types = ["wait", "process", "finish", "error", "success"];
                 return types.includes(val);
             },
@@ -33,20 +34,33 @@ export default {
         direction: {
             type: String,
             default: "horizontal",
-            validator(val) {
+            validator(val: string) {
                 const types = ["horizontal", "vertical"];
                 return types.includes(val);
             },
         },
     },
-    mounted() {
-        const children = findComponentsDownward(this, "FoxStep");
-        children.map((cur, i) => {
-            cur.updateIndex(i + 1);
-        });
+    provide() {
+        return {
+            parent: this,
+        };
     },
-};
+    setup() {
+        const children: any = ref([]);
+        const appendChild = (child: any) => {
+            children.value.push(child);
+        };
+        onMounted(() => {
+            children.value.map((cur: { updateIndex: (arg0: any) => void }, i: number) => {
+                console.log(cur);
+                cur.updateIndex(i + 1);
+            });
+        });
+        return { children, appendChild };
+    },
+});
 </script>
+
 <style lang="scss">
 .ins-steps {
     display: flex;

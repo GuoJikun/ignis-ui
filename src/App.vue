@@ -206,6 +206,19 @@
                 </div>
             </div>
         </div>
+        <div class="layout-item">
+            <p class="title">Steps 步骤条</p>
+            <div class="layout-item-body">
+                <ins-steps :active="active">
+                    <ins-step title="步骤一" description="这里是该步骤的描述信息"></ins-step>
+                    <ins-step title="步骤二" description="这里是该步骤的描述信息"></ins-step>
+                    <ins-step title="步骤三" description="这里是该步骤的描述信息"></ins-step>
+                </ins-steps>
+                <ins-button class="mt-20" type="primary" @click.prevent="next">
+                    下一步
+                </ins-button>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -220,6 +233,7 @@ export default defineComponent({
             value: [],
             value2: [],
             modalVisiable: false,
+            active: 0,
         };
     },
     methods: {
@@ -233,6 +247,14 @@ export default defineComponent({
             } else {
                 this.test = true;
             }
+        },
+        next() {
+            if (this.active < 3) {
+                this.active = this.active + 1;
+            } else {
+                this.active = 1;
+            }
+            console.log(this.active, "this.active");
         },
     },
 });
@@ -269,5 +291,8 @@ p {
     font-weight: 600;
     line-height: 1.6;
     margin: 0;
+}
+.mt-20 {
+    margin-top: 20px;
 }
 </style>

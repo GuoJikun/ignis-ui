@@ -1,6 +1,6 @@
 import Step from "./src/index.vue";
 
-Step.install = (app: any): void => {
+Step.install = (app: any) => {
     app.component(Step.name, Step);
 };
 
