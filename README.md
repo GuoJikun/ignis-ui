@@ -41,11 +41,12 @@ Vue.use(foxDesign)
 -   Breadcrumb
 -   BreadcrumbItem
 -   Progress
+-   Modal
+-   Timeline
+-   TimelineItem
 
 ### 未完成组件
 
--   Timeline
--   TimelineItem
 -   Input
 -   Select
 -   Form
@@ -53,7 +54,6 @@ Vue.use(foxDesign)
 -   DatePicker
 -   TimePicker
 -   Switch
--   Modal
 -   Tooltip
 -   Message
 -   Notification

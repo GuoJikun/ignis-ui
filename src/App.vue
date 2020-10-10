@@ -164,6 +164,48 @@
                 </ins-layout>
             </div>
         </div>
+        <div class="layout-item">
+            <p class="title">Modal 拟态框</p>
+            <div class="layout-item-body">
+                <ins-button type="primary" @click="modalVisiable = true">点击打开 Modal</ins-button>
+                <ins-modal v-model:visiable="modalVisiable" title="Modal测试">
+                    <p>这是一段信息</p>
+                </ins-modal>
+            </div>
+        </div>
+        <div class="layout-item">
+            <p class="title">Timeline 时间线</p>
+            <div class="layout-item-body">
+                <div style="display: inline-block;width: 280px">
+                    <h4 style="text-indent: 36px;">正序</h4>
+                    <ins-timeline>
+                        <ins-timeline-item timestamp="2018-04-15">
+                            活动按期开始
+                        </ins-timeline-item>
+                        <ins-timeline-item timestamp="2018-04-13">
+                            通过审核
+                        </ins-timeline-item>
+                        <ins-timeline-item timestamp="2018-04-11">
+                            创建成功
+                        </ins-timeline-item>
+                    </ins-timeline>
+                </div>
+                <div style="display: inline-block;width: 280px;">
+                    <h4 style="text-indent: 36px;">倒序</h4>
+                    <ins-timeline reverse>
+                        <ins-timeline-item timestamp="2018-04-15">
+                            活动按期开始
+                        </ins-timeline-item>
+                        <ins-timeline-item timestamp="2018-04-13" type="primary">
+                            通过审核
+                        </ins-timeline-item>
+                        <ins-timeline-item timestamp="2018-04-11" type="success">
+                            创建成功
+                        </ins-timeline-item>
+                    </ins-timeline>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -177,6 +219,7 @@ export default defineComponent({
             test: true,
             value: [],
             value2: [],
+            modalVisiable: false,
         };
     },
     methods: {

@@ -1,6 +1,6 @@
 import TimelineItem from "./src/index.vue";
 
-TimelineItem.install = (app: any): void => {
+TimelineItem.install = (app: any) => {
     app.component(TimelineItem.name, TimelineItem);
 };
 

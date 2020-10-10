@@ -5,7 +5,10 @@
         <div
             v-if="!$slots.dot"
             class="ins-timeline-item__node"
-            :class="[`ins-timeline-item__node--${size || ''}`, `ins-timeline-item__node--${type || ''}`]"
+            :class="[
+                `ins-timeline-item__node--${size || ''}`,
+                `ins-timeline-item__node--${type || ''}`,
+            ]"
             :style="{
                 backgroundColor: color,
             }"
@@ -17,7 +20,10 @@
         </div>
 
         <div class="ins-timeline-item__wrapper">
-            <div v-if="!hideTimestamp && placement === 'top'" class="ins-timeline-item__timestamp is-top">
+            <div
+                v-if="!hideTimestamp && placement === 'top'"
+                class="ins-timeline-item__timestamp is-top"
+            >
                 {{ timestamp }}
             </div>
 
@@ -25,18 +31,22 @@
                 <slot></slot>
             </div>
 
-            <div v-if="!hideTimestamp && placement === 'bottom'" class="ins-timeline-item__timestamp is-bottom">
+            <div
+                v-if="!hideTimestamp && placement === 'bottom'"
+                class="ins-timeline-item__timestamp is-bottom"
+            >
                 {{ timestamp }}
             </div>
         </div>
     </li>
 </template>
 
-<script>
-import { prefix } from "@/utils/assist.js";
-export default {
+<script lang="ts">
+import { prefix } from "@/utils/assist";
+import { defineComponent } from "vue";
+
+export default defineComponent({
     name: `${prefix}TimelineItem`,
-    inject: ["timeline"],
     props: {
         timestamp: String,
         hideTimestamp: {
@@ -46,13 +56,13 @@ export default {
         placement: {
             type: String,
             default: "bottom",
-            validator(value) {
+            validator(value: string) {
                 return ["top", "bottom"].includes(value);
             },
         },
         type: {
             type: String,
-            validator(value) {
+            validator(value: string) {
                 return ["primary", "success", "warning", "danger", "info"].includes(value);
             },
         },
@@ -60,13 +70,13 @@ export default {
         size: {
             type: String,
             default: "normal",
-            validator(value) {
+            validator(value: string) {
                 return ["normal", "large"].includes(value);
             },
         },
         icon: String,
     },
-};
+});
 </script>
 
 <style lang="scss">

@@ -1,36 +1,20 @@
-<template>
-    <ul class="ins-timeline">
-        <slot></slot>
-    </ul>
-</template>
+<script lang="ts">
+import { prefix } from "@/utils/assist";
+import { defineComponent, h } from "vue";
 
-<script>
-import { prefix } from "@/utils/assist.js";
-export default {
+export default defineComponent({
     name: `${prefix}Timeline`,
     props: {
-        reverse: {
-            type: Boolean,
-            default: false,
-        },
+        reverse: Boolean,
     },
-    provide() {
-        return {
-            timeline: this,
-        };
+    setup(props, { slots }: any) {
+        const defaultSlots = slots.default();
+        const children = props.reverse ? defaultSlots : [...defaultSlots].reverse();
+        return () => h("ul", { class: "ins-timeline" }, children);
     },
-    watch: {
-        reverse: {
-            handler(newVal) {
-                if (newVal) {
-                    this.$slots.default = [...this.$slots.default].reverse();
-                }
-            },
-            immediate: true,
-        },
-    },
-};
+});
 </script>
+
 <style lang="scss">
 @import "@/style/common/var.scss";
 .ins-timeline {

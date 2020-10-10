@@ -40,9 +40,10 @@ import BreadcrumbItem from "./components/breadcrumb-item/index";
 // import Steps from "./components/steps/index";
 // import Step from "./components/step/index";
 // 其它组件
-// import Timeline from "./components/timeline/index";
-// import TimelineItem from "./components/timeline-item/index";
+import Timeline from "./components/timeline/index";
+import TimelineItem from "./components/timeline-item/index";
 // import Tooltip from "./components/tooltip/index";
+import Modal from "./components/modal/index";
 
 import CollapseTransition from "./components/collapse-transition/index";
 
@@ -88,9 +89,10 @@ const components = [
     // Steps,
     // Step,
 
-    // Timeline,
-    // TimelineItem,
+    Timeline,
+    TimelineItem,
     // Tooltip,
+    Modal,
 ];
 // 定义 install 方法，接收 Vue 作为参数
 function install(app: any): void {

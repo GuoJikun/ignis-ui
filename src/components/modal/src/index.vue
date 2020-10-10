@@ -1,431 +1,154 @@
 <template>
-    <div :class="[prefixCls]" @mouseenter="handleShowPopper" @mouseleave="handleClosePopper">
-        <div :class="[prefixCls + '-rel']" ref="reference">
-            <slot></slot>
-        </div>
+    <teleport to="body">
         <transition name="fade">
-            <div
-                :class="[prefixCls + '-popper', prefixCls + '-' + theme]"
-                :style="dropStyles"
-                ref="popper"
-                v-show="!disabled && (visible || always)"
-                @mouseenter="handleShowPopper"
-                @mouseleave="handleClosePopper"
-                :data-transfer="transfer"
-            >
-                <div :class="[prefixCls + '-content']">
-                    <div :class="[prefixCls + '-arrow']"></div>
-                    <div :class="innerClasses" :style="innerStyles">
-                        <slot name="content">{{ content }}</slot>
+            <div class="ins-modal" v-show="visiable">
+                <div class="ins-modal-mask"></div>
+                <div class="ins-modal-wrap">
+                    <div class="ins-modal-header">
+                        <slot name="header">{{ title }}</slot>
                     </div>
+                    <div class="ins-modal-body">
+                        <slot></slot>
+                    </div>
+                    <div class="ins-modal-footer" v-if="!footerHide">
+                        <slot name="footer">
+                            <ins-button @click="closeModal('cancel')">
+                                取消
+                            </ins-button>
+                            <ins-button type="primary" @click="sure">
+                                确定
+                            </ins-button>
+                        </slot>
+                    </div>
+                    <div class="ins-modal-close" @click="closeModal('close')"></div>
                 </div>
             </div>
         </transition>
-    </div>
+    </teleport>
 </template>
-<script>
-import { prefix } from "@/utils/assist.js";
-import { oneOf } from "@/utils/assist.js";
-import Popper from "@/utils/vue-popper.js";
-import { transferIndex, transferIncrease } from "@/utils/transfer-queue";
-const prefixCls = "ins-tooltip";
-export default {
-    name: `${prefix}Tooltip`,
-    mixins-: [Popper],
+
+<script lang="ts">
+import { prefix } from "@/utils/assist";
+import { defineComponent } from "vue";
+import InsButton from "@/components/button/index";
+
+export default defineComponent({
+    name: `${prefix}Modal`,
+    components: { InsButton },
     props: {
-        placement: {
-            validator(value) {
-                const types = [
-                    "top",
-                    "top-start",
-                    "top-end",
-                    "bottom",
-                    "bottom-start",
-                    "bottom-end",
-                    "left",
-                    "left-start",
-                    "left-end",
-                    "right",
-                    "right-start",
-                    "right-end",
-                ];
-                return types.includes(value);
-            },
-            default: "bottom",
-        },
-        content: {
-            type: [String, Number],
-            default: "",
-        },
-        delay: {
-            type: Number,
-            default: 100,
-        },
-        disabled: {
+        visiable: {
             type: Boolean,
             default: false,
         },
-        controlled: {
-            // under this prop,Tooltip will not close when mouseleave
-            type: Boolean,
-            default: false,
-        },
-        always: {
-            type: Boolean,
-            default: false,
-        },
-        transfer: {
-            type: Boolean,
-            default() {
-                return !this.$IVIEW || this.$IVIEW.transfer === "" ? false : this.$IVIEW.transfer;
-            },
-        },
-        theme: {
-            validator(value) {
-                return oneOf(value, ["dark", "light"]);
-            },
-            default: "dark",
-        },
-        maxWidth: {
-            type: [String, Number],
-        },
+        title: String,
+        footerHide: Boolean,
     },
-    data() {
-        return {
-            prefixCls: prefixCls,
-            tIndex: this.handleGetIndex(),
+    setup(props, { emit }) {
+        const closeModal = (type: string) => {
+            emit("update:visiable", false);
+            emit("close", type);
         };
+        const sure = () => {
+            emit("ok");
+        };
+        return { closeModal, sure };
     },
-    computed: {
-        innerStyles() {
-            const styles = {};
-            if (this.maxWidth) styles["max-width"] = `${this.maxWidth}px`;
-            return styles;
-        },
-        innerClasses() {
-            return [
-                `${prefixCls}-inner`,
-                {
-                    [`${prefixCls}-inner-with-width`]: !!this.maxWidth,
-                },
-            ];
-        },
-        dropStyles() {
-            let styles = {};
-            if (this.transfer) styles["z-index"] = 1060 + this.tIndex;
-            return styles;
-        },
-    },
-    watch: {
-        content() {
-            this.updatePopper();
-        },
-    },
-    methods: {
-        handleShowPopper() {
-            if (this.timeout) clearTimeout(this.timeout);
-            this.timeout = setTimeout(() => {
-                this.visible = true;
-            }, this.delay);
-            this.tIndex = this.handleGetIndex();
-        },
-        handleClosePopper() {
-            if (this.timeout) {
-                clearTimeout(this.timeout);
-                if (!this.controlled) {
-                    this.timeout = setTimeout(() => {
-                        this.visible = false;
-                    }, 100);
-                }
-            }
-        },
-        handleGetIndex() {
-            transferIncrease();
-            return transferIndex;
-        },
-    },
-    mounted() {
-        if (this.always) {
-            this.updatePopper();
-        }
-    },
-};
+});
 </script>
+
 <style lang="scss">
-.ins-tooltip {
-    display: inline-block;
-    &-rel {
-        @extend .ins-tooltip;
-        position: relative;
-        width: inherit;
+.ins-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    &-mask {
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba($color: #000000, $alpha: 0.4);
     }
-    &-popper {
-        display: block;
-        visibility: visible;
+    &-wrap {
+        width: 500px;
+        position: absolute;
+        top: 8vh;
+        left: 50%;
+        margin-left: -250px;
+        background-color: #fff;
+        border-radius: 8px;
+        z-index: 1;
         font-size: 14px;
-        line-height: 1.5;
+    }
+    &-header {
+        padding: 12px 16px;
+        border-bottom: 1px solid #e4e7ed;
+        font-size: 15px;
+    }
+    &-footer {
+        padding: 12px 16px;
+        border-top: 1px solid #e4e7ed;
+        text-align: right;
+    }
+    &-body {
+        padding: 16px;
+    }
+    &-close {
         position: absolute;
-        z-index: 1060;
-        &[x-placement^="top"] {
-            padding: 5px 0 8px;
-            & .ins-tooltip-arrow {
-                bottom: 3px;
-                border-width: 5px 5px 0;
-                border-top-color: rgba(70, 76, 91, 0.9);
-            }
+        top: 12px;
+        right: 12px;
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        &::before,
+        &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            left: 8px;
+            top: 0;
+            width: 1px;
+            height: 16px;
+            background-color: #999;
+            border-radius: 0.5px;
+            transform: rotate(-45deg);
+            z-index: -1;
         }
-        &[x-placement="top"] {
-            & .ins-tooltip-arrow {
-                left: 50%;
-                margin-left: -5px;
-            }
+        &::before {
+            transform: rotate(45deg);
         }
-        &[x-placement="top-start"] {
-            & .ins-tooltip-arrow {
-                left: 16px;
-            }
-        }
-        &[x-placement="top-end"] {
-            & .ins-tooltip-arrow {
-                right: 16px;
-            }
-        }
-        &[x-placement^="bottom"] {
-            padding: 8px 0 5px;
-            & .ins-tooltip-arrow {
-                top: 3px;
-                border-width: 0 5px 5px;
-                border-bottom-color: rgba(70, 76, 91, 0.9);
-            }
-        }
-        &[x-placement="bottom"] {
-            & .ins-tooltip-arrow {
-                left: 50%;
-                margin-left: -5px;
-            }
-        }
-        &[x-placement="bottom-start"] {
-            & .ins-tooltip-arrow {
-                left: 16px;
-            }
-        }
-        &[x-placement="bottom-end"] {
-            & .ins-tooltip-arrow {
-                right: 16px;
-            }
-        }
-        &[x-placement^="left"] {
-            padding: 0 8px 0 5px;
-            & .ins-tooltip-arrow {
-                right: 3px;
-                border-width: 5px 0 5px 5px;
-                border-left-color: rgba(70, 76, 91, 0.9);
-            }
-        }
-        &[x-placement="left"] {
-            & .ins-tooltip-arrow {
-                top: 50%;
-                margin-top: -5px;
-            }
-        }
-        &[x-placement="left-start"] {
-            & .ins-tooltip-arrow {
-                top: 8px;
-            }
-        }
-        &[x-placement="left-end"] {
-            & .ins-tooltip-arrow {
-                bottom: 8px;
-            }
-        }
-        &[x-placement^="right"] {
-            padding: 0 5px 0 8px;
-            & .ins-tooltip-arrow {
-                left: 3px;
-                border-width: 5px 5px 5px 0;
-                border-right-color: rgba(70, 76, 91, 0.9);
-            }
-        }
-        &[x-placement="right"] {
-            & .ins-tooltip-arrow {
-                top: 50%;
-                margin-top: -5px;
-            }
-        }
-        &[x-placement="right-start"] {
-            & .ins-tooltip-arrow {
-                top: 8px;
-            }
-        }
-        &[x-placement="right-end"] {
-            & .ins-tooltip-arrow {
-                bottom: 8px;
-            }
+        &:hover::before,
+        &:hover::after {
+            background-color: #444;
         }
     }
-    &-arrow {
-        position: absolute;
-        width: 0;
-        height: 0;
-        border-color: transparent;
-        border-style: solid;
-    }
-    &-inner {
-        max-width: 250px;
-        min-height: 34px;
-        padding: 8px 12px;
-        color: #fff;
-        text-align: left;
-        text-decoration: none;
-        background-color: rgba(70, 76, 91, 0.9);
+    &-button {
+        line-height: 1em;
+        font-size: 14px;
+        padding: 8px 20px;
+        border: 1px solid #dcdfe6;
+        outline: none;
+        display: inline-block;
         border-radius: 4px;
-        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
-        white-space: nowrap;
-    }
-    &-light {
-        &.ins-tooltip-popper {
-            &[x-placement^="top"] {
-                padding: 7px 0 10px;
-                & .ins-tooltip-arrow {
-                    bottom: 3px;
-                    border-width: 7px 7px 0;
-                    border-top-color: hsla(0, 0%, 85%, 0.5);
-                    &::after {
-                        content: "";
-                        bottom: 1px;
-                        margin-left: -7px;
-                        border-bottom-width: 0;
-                        border-top-width: 7px;
-                        border-top-color: #fff;
-                    }
-                }
-            }
-            &[x-placement="top"] {
-                & .ins-tooltip-arrow {
-                    left: 50%;
-                    margin-left: -7px;
-                }
-            }
-            &[x-placement="top-start"] {
-                & .ins-tooltip-arrow {
-                    left: 16px;
-                }
-            }
-            &[x-placement="top-end"] {
-                & .ins-tooltip-arrow {
-                    right: 16px;
-                }
-            }
-            &[x-placement^="bottom"] {
-                padding: 10px 0 7px;
-                & .ins-tooltip-arrow {
-                    top: 3px;
-                    border-width: 0 7px 7px;
-                    border-bottom-color: hsla(0, 0%, 85%, 0.5);
-                    &::after {
-                        content: " ";
-                        top: 1px;
-                        margin-left: -7px;
-                        border-top-width: 0;
-                        border-bottom-width: 7px;
-                        border-bottom-color: #fff;
-                    }
-                }
-            }
-            &[x-placement="bottom"] {
-                & .ins-tooltip-arrow {
-                    left: 50%;
-                    margin-left: -7px;
-                }
-            }
-            &[x-placement="bottom-start"] {
-                & .ins-tooltip-arrow {
-                    left: 16px;
-                }
-            }
-            &[x-placement="bottom-end"] {
-                & .ins-tooltip-arrow {
-                    right: 16px;
-                }
-            }
-            &[x-placement^="left"] {
-                padding: 0 10px 0 7px;
-                & .ins-tooltip-arrow {
-                    right: 3px;
-                    border-width: 7px 0 7px 7px;
-                    border-left-color: hsla(0, 0%, 85%, 0.5);
-                    &::after {
-                        content: "";
-                        right: 1px;
-                        margin-top: -7px;
-                        border-right-width: 0;
-                        border-left-width: 7px;
-                        border-left-color: #fff;
-                    }
-                }
-            }
-            &[x-placement="left"] {
-                & .ins-tooltip-arrow {
-                    top: 50%;
-                    margin-top: -7px;
-                }
-            }
-            &[x-placement="left-start"] {
-                & .ins-tooltip-arrow {
-                    top: 8px;
-                }
-            }
-            &[x-placement="left-end"] {
-                & .ins-tooltip-arrow {
-                    bottom: 8px;
-                }
-            }
-            &[x-placement^="right"] {
-                padding: 0 7px 0 10px;
-                & .ins-tooltip-arrow {
-                    left: 3px;
-                    border-width: 7px 7px 7px 0;
-                    border-right-color: hsla(0, 0%, 85%, 0.5);
-                    &::after {
-                        content: "";
-                        left: 1px;
-                        margin-top: -7px;
-                        border-left-width: 0;
-                        border-right-width: 7px;
-                        border-right-color: #fff;
-                    }
-                }
-            }
-            &[x-placement="right"] {
-                & .ins-tooltip-arrow {
-                    top: 50%;
-                    margin-top: -7px;
-                }
-            }
-            &[x-placement="right-start"] {
-                & .ins-tooltip-arrow {
-                    top: 8px;
-                }
-            }
-            &[x-placement="right-end"] {
-                & .ins-tooltip-arrow {
-                    bottom: 8px;
-                }
-            }
+        cursor: pointer;
+        background-color: #fff;
+        transition: 0.1s;
+        &:hover {
+            color: #409eff;
+            border-color: #c6e2ff;
+            background-color: #ecf5ff;
         }
-        .ins-tooltip-arrow {
-            &::after {
-                display: block;
-                width: 0;
-                height: 0;
-                position: absolute;
-                border: 7px solid transparent;
-                content: "";
-            }
+        & + & {
+            margin-left: 10px;
         }
-        .ins-tooltip-inner {
-            background-color: #fff;
-            color: #515a6e;
+
+        &-primary {
+            background-color: #2d8cf0;
+            border-color: #2d8cf0;
+            color: white;
+            &:hover {
+                background: #66b1ff;
+                border-color: #66b1ff;
+                color: #fff;
+            }
         }
     }
 }
