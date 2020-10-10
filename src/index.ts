@@ -11,8 +11,8 @@ import Row from "./components/row/index";
 import Col from "./components/col/index";
 import Card from "./components/card/index";
 import Divider from "./components/divider/index";
-// import CellGroup from "./components/cell-group/index";
-// import Cell from "./components/cell/index";
+import CellGroup from "./components/cell-group/index";
+import Cell from "./components/cell/index";
 import Collapse from "./components/collapse/index";
 import CollapseItem from "./components/collapse-item/index";
 // 数据组件
@@ -59,8 +59,8 @@ const components = [
     Divider,
     Row,
     Col,
-    // CellGroup,
-    // Cell,
+    CellGroup,
+    Cell,
     Collapse,
     CollapseItem,
     CollapseTransition,

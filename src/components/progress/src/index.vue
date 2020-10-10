@@ -11,7 +11,7 @@
         <div :class="['ins-progress-bar', { 'is-text-nside': textinside }]" v-if="type === 'line'">
             <div class="ins-progress-bar__outer" :style="getHeight">
                 <div class="ins-progress-bar__inner" :style="[widths]">
-                    <span v-if="textins - ide && showText" class="ins-progress-bar__inner-text">
+                    <span v-if="textinside && showText" class="ins-progress-bar__inner-text">
                         {{ percentage }}%
                     </span>
                 </div>
@@ -37,7 +37,7 @@
                 ></path>
             </svg>
         </div>
-        <div class="ins-progress__text" v-if="!textins - ide && showText" v-html="text"></div>
+        <div class="ins-progress__text" v-if="!textinside && showText" v-html="text"></div>
     </div>
 </template>
 

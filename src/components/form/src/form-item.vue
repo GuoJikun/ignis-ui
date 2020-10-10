@@ -9,20 +9,20 @@
         >
         <div class="ins-form-item-content" :style="{ marginLeft: getWidth }">
             <slot></slot>
-            <div v-if="validateState === 'error'" class="ins-form-item-message">{{ validateMessage }}</div>
+            <div v-if="validateState === 'error'" class="ins-form-item-message">
+                {{ validateMessage }}
+            </div>
         </div>
     </div>
 </template>
 
-<script>
+<script lang="ts">
 import { prefix } from "@/utils/assist";
-import Emitter from "@/mixins/emitter";
 import AsyncValidator from "async-validator";
+import { defineComponent, inject, onMounted, reactive, toRefs } from "vue";
 
-export default {
+export default defineComponent({
     name: `${prefix}FormItem`,
-    mixins: [Emitter],
-    inject: ["form"],
     props: {
         label: {
             type: String,
@@ -31,18 +31,23 @@ export default {
         prop: String,
         labelWidth: [String, Number],
     },
-    data() {
-        return {
+    setup(props) {
+        const form: any = inject("form");
+        const data = reactive({
             isRequired: false, // 是否为必填
             validateState: "", // 校验状态
             validateMessage: "", // 校验不通过时的提示信息
-        };
+        });
+        if (props.prop) {
+            const initialValue = form.model[props.prop];
+        }
+        return { form, ...toRefs(data), initialValue };
     },
     // 组件渲染时，将实例缓存在 Form 中
     mounted() {
         // 如果没有传入 prop，则无需校验，也就无需缓存
         if (this.prop) {
-            this.dispatch("foxForm", "on-form-item-add", this);
+            this.form.onFormItemAdd(this);
             // 设置初始值，以便在重置时恢复默认值
             this.initialValue = this.fieldValue;
             this.setRules();
@@ -120,19 +125,19 @@ export default {
     },
     computed: {
         // 从 Form 的 model 中动态得到当前表单组件的数据
-        fieldValue() {
+        fieldValue(): any {
             return this.form.model[this.prop];
         },
-        getWidth() {
+        getWidth(): string {
             const width = this.labelWidth || this.form.labelWidth || false;
             return width ? width + "px" : "auto";
         },
     },
     // 组件销毁前，将实例从 Form 的缓存中移除
     beforeUnmount() {
-        this.dispatch("foxForm", "on-form-item-remove", this);
+        this.form.onFormItemRemove(this);
     },
-};
+});
 </script>
 
 <style lang="scss">

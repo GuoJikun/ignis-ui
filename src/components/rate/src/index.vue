@@ -23,8 +23,9 @@
 
 <script>
 import { prefix } from "@/utils/assist.js";
-import InsIcon from "@/components/icon/index.js";
-import Emitter from "@/mixins-/emitter.js";
+import InsIcon from "@/components/icon/index";
+import Emitter from "@/mixins/emitter";
+
 export default {
     name: `${prefix}Rate`,
     components: { InsIcon },

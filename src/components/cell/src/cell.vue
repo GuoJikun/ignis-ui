@@ -1,48 +1,59 @@
 <template>
     <div :class="['ins-cell', { 'is-disabled': disabled }, { 'is-selected': selected }]">
         <div class="ins-cell__main" @click="handleClick">
-            <router-link v-if="!!to" tag="a" :to="to" :replace="replace" :target="target" class="ins-cell-item">
-                <div class="ins-cell-icon" v-if="icon || $slots.icon">
+            <router-link
+                v-if="!!to"
+                tag="a"
+                :to="to"
+                :replace="replace"
+                :target="target"
+                class="ins-cell-item"
+            >
+                <div class="ins-cell-icon" v-if="showIcon">
                     <slot name="icon"></slot>
                 </div>
                 <div class="ins-cell-text">
                     <div class="ins-cell-title">
                         <slot>{{ title }}</slot>
                     </div>
-                    <div class="ins-cell-label" v-if="label || $slots.label">
+                    <div class="ins-cell-label" v-if="showLabel">
                         <slot name="label">{{ label }}</slot>
                     </div>
                 </div>
-                <div class="ins-cell-extra" :style="[extraStyle]">
+                <div class="ins-cell-extra" :style="extraStyle()">
                     <slot name="extra">{{ extra }}</slot>
                 </div>
             </router-link>
             <div v-else class="ins-cell-item">
-                <div class="ins-cell-icon" v-if="icon || $slots.icon">
+                <div class="ins-cell-icon" v-if="showIcon">
                     <slot name="icon"></slot>
                 </div>
                 <div class="ins-cell-text">
                     <div class="ins-cell-title">
                         <slot>{{ title }}</slot>
                     </div>
-                    <div class="ins-cell-label" v-if="label || $slots.label">
+                    <div class="ins-cell-label" v-if="showLabel">
                         <slot name="label">{{ label }}</slot>
                     </div>
                 </div>
-                <div class="ins-cell-extra" :style="[extraStyle]">
+                <div class="ins-cell-extra" :style="extraStyle()">
                     <slot name="extra">{{ extra }}</slot>
                 </div>
             </div>
         </div>
-        <div class="ins-cell__arrow" v-if="$slots.arrow || to || isLink">
-            <ins-icon name="chevron-right"></ins-icon>
+        <div class="ins-cell__arrow" v-if="showArrow">
+            <slot name="arrow">
+                <ins-icon name="chevron-right"></ins-icon>
+            </slot>
         </div>
     </div>
 </template>
 
-<script>
-import { prefix } from "@/utils/assist.js";
-export default {
+<script lang="ts">
+import { prefix } from "@/utils/assist";
+import { defineComponent } from "vue";
+
+export default defineComponent({
     name: `${prefix}Cell`,
     props: {
         title: String,
@@ -72,27 +83,41 @@ export default {
             default: "_self",
         },
     },
+    setup(props, { slots }) {
+        const showIcon = () => {
+            return !!props.icon || (slots && slots.icon);
+        };
+        const showLabel = () => {
+            return !!props.label || (slots && slots.label);
+        };
+        const showArrow = () => {
+            console.log(slots && slots.arrow, 123);
+            return (slots && !!slots.arrow) || props.isLink || !!props.to;
+        };
+        const extraStyle = () => {
+            const right = {
+                right: "34px",
+            };
+            const flag = !!props.to || props.isLink || (slots && slots.arrow);
+            return flag ? right : {};
+        };
+        return { showIcon, showLabel, extraStyle, showArrow };
+    },
     methods: {
         handleClick() {
-            this.$emit("click", this.name);
+            this.$emit("on-click", this.name);
         },
     },
-    computed: {
-        extraStyle() {
-            const right = {
-                right: "32px",
-            };
-            const flag = !!this.to || this.isLink || !!this.$slots.arrow;
-            return flag ? right : "";
-        },
-    },
-};
+});
 </script>
+
 <style lang="scss">
 @import "@/style/common/var.scss";
 .ins-cell {
     position: relative;
     box-sizing: border-box;
+    display: flex;
+    align-content: center;
     margin: 0;
     line-height: normal;
     padding: 7px 16px;
@@ -120,6 +145,7 @@ export default {
     }
     &-item {
         color: inherit;
+        display: flex;
         &:active,
         &:hover {
             color: inherit;
@@ -153,6 +179,7 @@ export default {
         top: 50%;
         right: 16px;
         color: #515a6e;
+        font-size: 12px;
     }
     &__arrow {
         display: inline-block;

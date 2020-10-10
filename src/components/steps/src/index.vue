@@ -52,7 +52,6 @@ export default defineComponent({
         };
         onMounted(() => {
             children.value.map((cur: { updateIndex: (arg0: any) => void }, i: number) => {
-                console.log(cur);
                 cur.updateIndex(i + 1);
             });
         });

@@ -4,15 +4,14 @@
     </div>
 </template>
 
-<script>
-import { prefix } from "@/utils/assist.js";
-export default {
+<script lang="ts">
+import { prefix } from "@/utils/assist";
+import { defineComponent } from "vue";
+
+export default defineComponent({
     name: `${prefix}CellGroup`,
     props: {
-        border: {
-            type: Boolean,
-            default: false,
-        },
+        border: Boolean,
     },
-};
+});
 </script>

@@ -2,7 +2,11 @@
     <div
         class="ins-input"
         ref=""
-        :class="[{ 'ins-input--suffix': !!suffixIcon || isClose }, { 'is-disabled': disabled }, getSize]"
+        :class="[
+            { 'ins-input--suffix': !!suffixIcon || isClose },
+            { 'is-disabled': disabled },
+            getSize,
+        ]"
         @mouseenter="mouseEnter"
         @mouseleave="mouseLeave"
     >
@@ -40,20 +44,20 @@
             <slot name="suffix" v-if="type === 'text' && suffixIcon">
                 <ins-icon :name="suffixIcon" class="ins-input__icon"></ins-icon>
             </slot>
-            <ins-icon name="x" class="ins-input-close" v-if="isClose" @click.native="clear"></ins-icon>
+            <ins-icon name="x" class="ins-input-close" v-if="isClose" @click="clear"></ins-icon>
         </span>
     </div>
 </template>
 
 <script>
-import { prefix } from "@/utils/assist.js";
-import FoxIcon from "@/components/icon";
-import Emitter from "@/mixins-/emitter.js";
+import { prefix } from "@/utils/assist";
+import InsIcon from "@/components/icon/index";
+import Emitter from "@/mixins/emitter";
 
 export default {
     name: `${prefix}Input`,
-    components: { FoxIcon },
-    mixins-: [Emitter],
+    components: { InsIcon },
+    mixins: [Emitter],
     model: {
         props: "value",
         event: "change",
