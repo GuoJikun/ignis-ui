@@ -27,12 +27,12 @@
     ],
     "scripts": {
         "serve:test": "vue-cli-service serve",
-        "serve:docs": "vuepress dev ./docs",
+        "serve:docs": "npx vuepress dev ./docs",
         "serve:lib": "vue-cli-service build --dest ui --target lib --name ignis-ui ./src/index.js",
         "build:docs": "npx vuepress build docs",
         "serve": "npm run serve:lib && npm run serve:docs",
         "build": "vue-cli-service build --modern --dest docs",
-        "build:lib": "vue-cli-service build --dest ui --target lib --name ignis-ui ./src/index.js",
+        "build:lib": "vue-cli-service build --dest ui --target lib --name ignis-ui ./src/index.ts",
         "test:unit": "vue-cli-service test:unit",
         "lint": "vue-cli-service lint"
     },

@@ -6,7 +6,7 @@ module.exports = {
     configureWebpack: config => {
         if (mode === "production") {
             // 正式发布时移除console语句
-            config.optimization.minimizer[0].options.terserOptions.compress.dropConsole = true;
+            // config.optimization.minimizer[0].options.terserOptions.compress.dropConsole = true;
         }
     },
     css: {

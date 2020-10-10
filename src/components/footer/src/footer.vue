@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, inject } from "vue";
 import { prefix } from "@/utils/assist";
 
 export default defineComponent({
@@ -15,6 +15,16 @@ export default defineComponent({
             type: String,
             default: "60px",
         },
+    },
+    setup() {
+        const layout: any = inject("layout");
+
+        return {
+            layout,
+        };
+    },
+    mounted() {
+        this.layout.updateNames(this.$options.name);
     },
     computed: {
         getHeight(): string {

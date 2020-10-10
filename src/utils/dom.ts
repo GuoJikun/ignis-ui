@@ -1,7 +1,5 @@
-const isServer = false;
+export const isServer = false;
 
-export { isServer };
-/* istanbul ignore next */
 const trim = (string: string) => {
     return (string || "").replace(/^[\s\uFEFF]+|[\s\uFEFF]+$/g, "");
 };
@@ -40,10 +38,9 @@ export const off = (() => {
 })();
 
 export const once = (el: HTMLElement, event: string, fn: Function) => {
-    // eslint-disable-next-line prettier/prettier
-    var listener = function s(this: any) {
+    const listener = function(this: any, ...args: any[]) {
         if (fn) {
-            fn.apply(this, arguments);
+            fn.apply(this, args);
         }
         off(el, event, listener);
     };
@@ -66,11 +63,11 @@ export function hasClass(el: HTMLElement, cls: string) {
  */
 export function addClass(el: HTMLElement, cls: string) {
     if (!el) return;
-    var curClass = el.className;
-    var classes = (cls || "").split(" ");
+    let curClass = el.className;
+    const classes = (cls || "").split(" ");
 
-    for (var i = 0, j = classes.length; i < j; i++) {
-        var clsName = classes[i];
+    for (let i = 0, j = classes.length; i < j; i++) {
+        const clsName = classes[i];
         if (!clsName) continue;
 
         if (el.classList) {
@@ -91,11 +88,11 @@ export function addClass(el: HTMLElement, cls: string) {
  */
 export function removeClass(el: HTMLElement, cls: string) {
     if (!el || !cls) return;
-    var classes = cls.split(" ");
-    var curClass = " " + el.className + " ";
+    const classes = cls.split(" ");
+    let curClass = " " + el.className + " ";
 
-    for (var i = 0, j = classes.length; i < j; i++) {
-        var clsName = classes[i];
+    for (let i = 0, j = classes.length; i < j; i++) {
+        const clsName = classes[i];
         if (!clsName) continue;
 
         if (el.classList) {

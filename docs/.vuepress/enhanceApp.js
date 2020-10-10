@@ -1,5 +1,5 @@
-import foxDesign from "../../lib/ins-design.umd.js";
-import "../../lib/ins-design.css";
+import foxDesign from "../../ui/ignis-ui.umd.js";
+import "../../ui/ignis-ui.css";
 console.log(foxDesign);
 // 使用异步函数也是可以的
 export default ({

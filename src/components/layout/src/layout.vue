@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import { prefix, oneOf } from "@/utils/assist";
 
 export default defineComponent({
@@ -18,26 +18,31 @@ export default defineComponent({
             },
         },
     },
-    computed: {
-        dir(): string {
+    provide() {
+        return {
+            layout: this,
+        };
+    },
+    setup() {
+        const names: any = ref([]);
+        const dir: any = ref(null);
+        const updateNames = (val: never) => {
+            names.value.push(val);
+        };
+
+        return { names, dir, updateNames };
+    },
+    mounted() {
+        this.dir = this.getDir();
+    },
+    methods: {
+        getDir(): string {
             if (this.direction) {
                 return this.direction;
             }
-            const slots = this.$slots;
-            console.log(slots, "slots");
-            const children = slots.default || [];
-
-            const tmp = children.filter(
-                (cur: { componentOptions: { tag: string } | undefined }) => {
-                    if (cur.componentOptions !== undefined) {
-                        return (
-                            cur.componentOptions.tag == "ins-header" ||
-                            cur.componentOptions.tag == "ins-footer"
-                        );
-                    }
-                }
-            );
-            if (tmp && tmp.length > 0) {
+            const headerFlag: boolean = this.names.includes("InsHeader");
+            const footerFlag: boolean = this.names.includes("InsFooter");
+            if (headerFlag || footerFlag) {
                 return "horizontal";
             } else {
                 return "vertical";

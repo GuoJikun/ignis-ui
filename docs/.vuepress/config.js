@@ -1,6 +1,6 @@
 const navbar = require("./config/navbar.js");
 const sidebar = require("./config/sidebar.js");
-const plugins- = require("./config/sidebar.js");
+const plugins = require("./config/sidebar.js");
 
 module.exports = {
     title: "ins-design",
@@ -9,7 +9,7 @@ module.exports = {
         nav: navbar,
         sidebar: sidebar,
     },
-    plugins-,
+    plugins,
     extraWatchFiles: [
         "./conf/sidebar.js", // 使用相对路径
         "./conf/navbar.js", // 使用绝对路径

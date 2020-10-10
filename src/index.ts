@@ -2,7 +2,7 @@ import Icon from "./components/icon/index";
 import Button from "./components/button/index";
 
 // 布局组件
-// import Layout from "./components/layout/index";
+import Layout from "./components/layout/index";
 import Header from "./components/header/index";
 import Footer from "./components/footer/index";
 import Aside from "./components/aside/index";
@@ -49,7 +49,7 @@ import CollapseTransition from "./components/collapse-transition/index";
 const components = [
     Icon,
     Button,
-    // Layout,
+    Layout,
     Header,
     Footer,
     Aside,

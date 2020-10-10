@@ -131,6 +131,39 @@
                 </ins-collapse>
             </div>
         </div>
+        <div class="layout-item">
+            <p class="title">Layout 布局</p>
+            <div class="layout-item-body">
+                <ins-layout>
+                    <ins-header
+                        style="background-color: #b3c0d1;text-align:center;line-height: 60px;"
+                    >
+                        Header
+                    </ins-header>
+                    <ins-layout>
+                        <ins-aside
+                            width="200px"
+                            style="background-color: #d3dce6;height: 200px;line-height: 200px;text-align: center;"
+                        >
+                            Aside
+                        </ins-aside>
+                        <ins-main
+                            style="background-color: #e9eef3;
+                                    color: #333;
+                                    text-align: center;
+                                    line-height: 160px;"
+                        >
+                            Main
+                        </ins-main>
+                    </ins-layout>
+                    <ins-footer
+                        style="background-color: #b3c0d1;text-align:center;line-height: 60px;"
+                    >
+                        Footer
+                    </ins-footer>
+                </ins-layout>
+            </div>
+        </div>
     </div>
 </template>
 
