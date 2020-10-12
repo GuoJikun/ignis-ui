@@ -1,21 +1,21 @@
-# ins-design
+# ins-ui
 
 ## 使用
 
 ### 安装
 
 ```bash
-yarn install ins-design
+yarn install ins-ui
 ```
 
 ### 引用
 
 ```bash
 import Vue from 'vue'
-import foxDesign from 'ins-design';
-import 'ins-design/lib/ins-design.css';
+import insUI from 'ins-ui';
+import 'ins-ui/lib/ins-ui.css';
 
-Vue.use(foxDesign)
+Vue.use(insUI)
 ```
 
 ## 所有组件
