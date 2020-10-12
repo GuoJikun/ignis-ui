@@ -46,6 +46,9 @@ Vue.use(foxDesign)
 -   TimelineItem
 -   Steps
 -   Step
+-   Rate
+-   Switch
+-   Drawer
 
 ### 未完成组件
 
@@ -55,7 +58,6 @@ Vue.use(foxDesign)
 -   FormItem
 -   DatePicker
 -   TimePicker
--   Switch
 -   Tooltip
 -   Message
 -   Notification
@@ -65,7 +67,6 @@ Vue.use(foxDesign)
 -   CheckboxGroup
 -   Table
 -   Upload
--   Rate
 -   Badge
 -   Tabs
 -   Tab

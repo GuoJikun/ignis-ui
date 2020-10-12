@@ -31,9 +31,9 @@ import Alert from "./components/alert/index";
 // import CheckboxGroup from "./components/checkbox-group/index";
 // import Select from "./components/select/index";
 // import Option from "./components/option/index";
-// import Switch from "./components/switch/index";
+import Switch from "./components/switch/index";
 // import DatePicker from "./components/datepicker/index";
-// import Rate from "./components/rate/index";
+import Rate from "./components/rate/index";
 // nav组件
 import Breadcrumb from "./components/breadcrumb/index";
 import BreadcrumbItem from "./components/breadcrumb-item/index";
@@ -44,6 +44,7 @@ import Timeline from "./components/timeline/index";
 import TimelineItem from "./components/timeline-item/index";
 // import Tooltip from "./components/tooltip/index";
 import Modal from "./components/modal/index";
+import Drawer from "./components/drawer/index";
 
 import CollapseTransition from "./components/collapse-transition/index";
 
@@ -75,9 +76,9 @@ const components = [
     // CheckboxGroup,
     // Select,
     // Option,
-    // Switch,
+    Switch,
     // DatePicker,
-    // Rate,
+    Rate,
 
     // Table,
     Tag,
@@ -93,6 +94,7 @@ const components = [
     TimelineItem,
     // Tooltip,
     Modal,
+    Drawer,
 ];
 // 定义 install 方法，接收 Vue 作为参数
 function install(app: any): void {

@@ -8,7 +8,6 @@
                 :key="item"
                 :style="getIconColor(item)"
                 @mouseenter="handleMouseenter($event, item)"
-                @mouseleave="handleMouseleave(item)"
                 @click="handleClick(item)"
             >
                 <i v-if="allowHalf" :style="['color', activeIconColor]"></i>
@@ -17,23 +16,17 @@
         <span class="ins-rate__text" v-show="showInfo">
             <slot>{{ value }}</slot>
         </span>
-        <input type="text" hidden :value="value" />
     </div>
 </template>
 
-<script>
-import { prefix } from "@/utils/assist.js";
+<script lang="ts">
+import { prefix } from "@/utils/assist";
 import InsIcon from "@/components/icon/index";
-import Emitter from "@/mixins/emitter";
+import { defineComponent, onMounted, reactive, toRefs } from "vue";
 
-export default {
+export default defineComponent({
     name: `${prefix}Rate`,
     components: { InsIcon },
-    mixins: [Emitter],
-    model: {
-        props: "value",
-        event: "change",
-    },
     props: {
         value: {
             type: Number,
@@ -47,14 +40,15 @@ export default {
             type: String,
             default: "star",
         },
-        iconColor: {
-            type: String,
-            default: "#c0c4cc",
-        },
         activeIcon: {
             type: String,
             default: "star-fill",
         },
+        iconColor: {
+            type: String,
+            default: "#c0c4cc",
+        },
+
         activeIconColor: {
             type: String,
             default: "#f5a623",
@@ -67,64 +61,68 @@ export default {
             type: Boolean,
             default: false,
         },
-        tigger: {
-            type: String,
-            default: "hover",
-            validator(value) {
-                return ["hover", "click"].includes(value);
-            },
-        },
         showInfo: {
             type: Boolean,
             default: true,
         },
+        tigger: {
+            type: String,
+            default: "hover",
+            validator: (value: string) => {
+                return ["hover", "click"].includes(value);
+            },
+        },
     },
-    data() {
-        return {
-            cur: this.value,
+    setup(props, { emit }) {
+        const data = reactive({
+            cur: 0,
+        });
+        onMounted(() => {
+            data.cur = props.value;
+        });
+        const handleMouseenter = (ev: any, val: number) => {
+            if (props.disabled) {
+                return false;
+            }
+            if (props.tigger === "hover") {
+                data.cur = val;
+                emit("update:value", data.cur);
+                emit("change", data.cur);
+                // this.dispatch("FormItem", "on-form-change", this.cur);
+            }
         };
-    },
-    methods: {
-        handleMouseenter(ev, val) {
-            if (this.disabled) {
+        const handleClick = (val: any) => {
+            if (props.disabled) {
                 return false;
             }
-            if (this.tigger === "hover") {
-                this.cur = val;
-                this.$emit("change", this.cur);
-                this.dispatch("FormItem", "on-form-change", this.cur);
+            if (props.tigger === "click") {
+                data.cur = val;
+                emit("update:value", data.cur);
+                emit("change", data.cur);
+                // this.dispatch("FormItem", "on-form-change", this.cur);
             }
-        },
-        handleMouseleave() {},
-        handleClick(val) {
-            if (this.disabled) {
-                return false;
-            }
-            if (this.tigger === "click") {
-                this.cur = val;
-                this.$emit("change", this.cur);
-                this.dispatch("FormItem", "on-form-change", this.cur);
-            }
-        },
-        getIconColor(item) {
-            if (this.cur < item) {
+        };
+        const getIconColor = (item: number) => {
+            if (data.cur < item) {
                 return {
-                    color: this.iconColor,
+                    color: props.iconColor,
                 };
             } else {
                 return {
-                    color: this.activeIconColor,
+                    color: props.activeIconColor,
                 };
             }
-        },
+        };
+        return { ...toRefs(data), handleMouseenter, handleClick, getIconColor };
     },
     watch: {
         value(val) {
             this.cur = val;
         },
     },
-};
+});
 </script>
+
 <style lang="scss">
 .ins-rate {
     display: flex;

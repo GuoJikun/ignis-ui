@@ -1,5 +1,8 @@
 <template>
-    <div :class="['ins-switch', { 'is-checked': isChecked }, { 'is-disabled': disabled }]" @click="switchs">
+    <div
+        :class="['ins-switch', { 'is-checked': isChecked }, { 'is-disabled': disabled }]"
+        @click="switchs"
+    >
         <input :value="curValue" :name="name" type="text" hidden />
         <span class="ins-switch__core" :style="switchWidth">
             <span v-if="activeText || inactiveText">{{ showText }}</span>
@@ -7,16 +10,12 @@
     </div>
 </template>
 
-<script>
-import { prefix } from "@/utils/assist.js";
-import Emitter from "@/mixins-/emitter.js";
-export default {
+<script lang="ts">
+import { prefix } from "@/utils/assist";
+import { defineComponent, onMounted, reactive, toRefs } from "vue";
+
+export default defineComponent({
     name: `${prefix}Switch`,
-    mixins-: [Emitter],
-    model: {
-        props: "value",
-        event: "change",
-    },
     props: {
         value: {
             type: [Number, String, Boolean],
@@ -42,34 +41,37 @@ export default {
         },
         name: String,
     },
-    data() {
-        return {
+    setup(props) {
+        const data: { curValue: any } = reactive({
             curValue: false,
-        };
-    },
-    mounted() {
-        this.curValue = this.value;
+        });
+        onMounted(() => {
+            data.curValue = props.value;
+        });
+        return { ...toRefs(data) };
     },
     methods: {
         switchs() {
             if (this.disabled) {
                 return;
             }
-            this.curValue = this.curValue == this.activeValue ? this.inactiveValue : this.activeValue;
+            this.curValue =
+                this.curValue == this.activeValue ? this.inactiveValue : this.activeValue;
             this.$emit("change", this.curValue);
-            this.dispatch("foxFormItem", "on-form-change", this.curValue);
+            this.$emit("update:value", this.curValue);
+            // this.dispatch("foxFormItem", "on-form-change", this.curValue);
         },
     },
     computed: {
-        switchWidth() {
+        switchWidth(): Record<string, string> {
             return {
                 width: this.width + "px",
             };
         },
-        showText() {
+        showText(): any {
             return this.curValue == this.activeValue ? this.activeText : this.inactiveText;
         },
-        isChecked() {
+        isChecked(): boolean {
             return this.curValue == this.activeValue;
         },
     },
@@ -78,7 +80,7 @@ export default {
             this.curValue = val;
         },
     },
-};
+});
 </script>
 
 <style lang="scss">

@@ -91,7 +91,6 @@ export default defineComponent({
             return !!props.label || (slots && slots.label);
         };
         const showArrow = () => {
-            console.log(slots && slots.arrow, 123);
             return (slots && !!slots.arrow) || props.isLink || !!props.to;
         };
         const extraStyle = () => {

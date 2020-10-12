@@ -120,36 +120,5 @@ export default defineComponent({
             background-color: #444;
         }
     }
-    &-button {
-        line-height: 1em;
-        font-size: 14px;
-        padding: 8px 20px;
-        border: 1px solid #dcdfe6;
-        outline: none;
-        display: inline-block;
-        border-radius: 4px;
-        cursor: pointer;
-        background-color: #fff;
-        transition: 0.1s;
-        &:hover {
-            color: #409eff;
-            border-color: #c6e2ff;
-            background-color: #ecf5ff;
-        }
-        & + & {
-            margin-left: 10px;
-        }
-
-        &-primary {
-            background-color: #2d8cf0;
-            border-color: #2d8cf0;
-            color: white;
-            &:hover {
-                background: #66b1ff;
-                border-color: #66b1ff;
-                color: #fff;
-            }
-        }
-    }
 }
 </style>

@@ -228,7 +228,7 @@
                         <ins-cell title="显示label" label="label的内容"></ins-cell>
                         <ins-cell title="显示extra" extra="extra"></ins-cell>
                         <ins-cell title="显示向右的icon" is-link name="link"></ins-cell>
-                        <ins-cell
+                        <!-- <ins-cell
                             title="链接"
                             is-link
                             name="link"
@@ -243,17 +243,42 @@
                             to="/layout"
                             @on-click="handleClick"
                             target="_blank"
-                        ></ins-cell>
+                        ></ins-cell> -->
                         <ins-cell title="禁用" disabled></ins-cell>
                         <ins-cell title="选中" selected></ins-cell>
-                        <!-- <ins-cell title="开关">
-                            <ins-switch
-                                slot="extra"
-                                v-model="status"
-                            ></ins-switch>
-                        </ins-cell> -->
+                        <ins-cell title="开关">
+                            <template v-slot:extra>
+                                <ins-switch v-model:value="switchValue"></ins-switch>
+                            </template>
+                        </ins-cell>
                     </ins-cell-group>
                 </ins-card>
+            </div>
+        </div>
+        <div class="layout-item">
+            <p class="title">Cell 单元格</p>
+            <div class="layout-item-body">
+                <ins-rate v-model:value="rateValue"></ins-rate>
+            </div>
+        </div>
+        <div class="layout-item">
+            <p class="title">Switch 开关</p>
+            <div class="layout-item-body">
+                <ins-switch v-model:value="switchValue"></ins-switch>
+            </div>
+        </div>
+        <div class="layout-item">
+            <p class="title">Drawer 抽屉</p>
+            <div class="layout-item-body">
+                <ins-button type="primary" @click="drawerValue = true">打开 Drawer</ins-button>
+                <ins-drawer v-model:visiable="drawerValue" width="500px">
+                    <p>drawer content ...</p>
+                    <p>drawer content ...</p>
+                    <p>drawer content ...</p>
+
+                    <br />
+                    <ins-button type="success" @click="drawerValue = false">关闭 Drawer</ins-button>
+                </ins-drawer>
             </div>
         </div>
     </div>
@@ -271,6 +296,9 @@ export default defineComponent({
             value2: [],
             modalVisiable: false,
             active: 0,
+            rateValue: 1,
+            switchValue: true,
+            drawerValue: false,
         };
     },
     methods: {
