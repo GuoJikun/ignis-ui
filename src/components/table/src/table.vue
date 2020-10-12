@@ -13,7 +13,11 @@
             </colgroup>
             <tbody class="ins-table__head">
                 <tr class="ins-table-tr">
-                    <td v-for="(th, index) in columns" :key="index" class="ins-table-td ins-table-th">
+                    <td
+                        v-for="(th, index) in columns"
+                        :key="index"
+                        class="ins-table-td ins-table-th"
+                    >
                         <div>{{ th.title }}</div>
                     </td>
                 </tr>
@@ -45,7 +49,12 @@
             </colgroup>
             <tbody class="ins-table__head">
                 <tr class="ins-table-tr">
-                    <td v-for="(th, index) in columns" :key="index" class="ins-table-td" style="border-bottom: none;">
+                    <td
+                        v-for="(th, index) in columns"
+                        :key="index"
+                        class="ins-table-td"
+                        style="border-bottom: none;"
+                    >
                         <div>{{ th.title }}</div>
                     </td>
                 </tr>
@@ -108,6 +117,7 @@ export default {
     },
 };
 </script>
+
 <style lang="scss">
 @import "@/style/common/var.scss";
 .ins-table {

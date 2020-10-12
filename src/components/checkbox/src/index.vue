@@ -2,7 +2,11 @@
     <label class="ins-checkbox">
         <span
             class="ins-checkbox__input"
-            :class="[{ 'is-checked': isChecked }, { 'is-disabled': disabled }, { 'is-indeterminate': indeterminate }]"
+            :class="[
+                { 'is-checked': isChecked },
+                { 'is-disabled': disabled },
+                { 'is-indeterminate': indeterminate },
+            ]"
         >
             <span class="ins-checkbox__inner"></span>
             <input :value="label" type="checkbox" tabIndex="-1" hidden @change="handleChange" />
@@ -14,18 +18,14 @@
     </label>
 </template>
 
-<script>
-import { prefix } from "@/utils/assist.js";
-import Emitter from "@/mixins-/emitter.js";
-import { findComponentUpward } from "@/utils/findComponent.js";
+<script lang="ts">
+import { prefix } from "@/utils/assist";
+import { findComponentUpward } from "@/utils/findComponent";
+import { defineComponent } from "vue";
 
-export default {
+export default defineComponent({
     name: `${prefix}Checkbox`,
-    mixins-: [Emitter],
-    model: {
-        props: "value",
-        event: "change",
-    },
+
     props: {
         value: {
             type: [Number, String, Boolean],
@@ -70,7 +70,7 @@ export default {
                 this.dispatch("FormItem", "on-form-change", value);
             }
         },
-        getCheckedValue(val) {
+        getCheckedValue(val: null) {
             const trueValue = this.trueLabel || true;
             const falseValue = this.falseLabel || false;
             const value = val ? trueValue : falseValue;
@@ -78,8 +78,8 @@ export default {
         },
     },
     computed: {
-        isChecked() {
-            let bool = false;
+        isChecked(): boolean {
+            let bool: any = false;
             const parent = findComponentUpward(this, "CheckboxGroup");
             if (parent) {
                 bool = parent.curValue.includes(this.label);
@@ -90,7 +90,7 @@ export default {
             return bool;
         },
     },
-};
+});
 </script>
 
 <style lang="scss" scoped>
@@ -143,7 +143,8 @@ export default {
         height: 14px;
         background-color: #fff;
         z-index: 1;
-        transition: border-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46), background-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46);
+        transition: border-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46),
+            background-color 0.25s cubic-bezier(0.71, -0.46, 0.29, 1.46);
         &:hover {
             border-color: $ins--color-primary;
         }
