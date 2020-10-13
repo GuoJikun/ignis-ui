@@ -4,44 +4,39 @@
     </div>
 </template>
 
-<script>
-import { prefix } from "@/utils/assist.js";
-import Emitter from "@/mixins-/emitter.js";
-export default {
+<script lang="ts">
+import { prefix } from "@/utils/assist";
+import { defineComponent, reactive, toRefs, watchEffect } from "vue";
+
+export default defineComponent({
     name: `${prefix}RadioGroup`,
-    mixins-: [Emitter],
-    model: {
-        props: "value",
-        event: "change",
-    },
     props: {
-        value: {
-            type: [Number, String, Boolean],
-        },
-        disabled: {
-            type: Boolean,
-            default: false,
-        },
+        value: [Number, String, Boolean],
+        disabled: Boolean,
+        name: String,
     },
-    data() {
+    provide() {
         return {
-            curValue: this.value,
+            parent: this,
         };
     },
-    methods: {
-        updateValue(val) {
-            this.curValue = val;
-            this.$emit("change", this.curValue);
-            this.dispatch("FormItem", "on-form-change", this.curValue);
-        },
+    setup(props, { emit }) {
+        const data = reactive({
+            curValue: props.value,
+        });
+        const updateValue = (val: string | number | boolean | undefined) => {
+            data.curValue = val;
+            emit("change", data.curValue);
+            emit("update:value", data.curValue);
+            // this.dispatch("FormItem", "on-form-change", this.curValue);
+        };
+        watchEffect(() => {
+            data.curValue = props.value;
+        });
+        return {
+            ...toRefs(data),
+            updateValue,
+        };
     },
-    watch: {
-        value: {
-            handler(val) {
-                this.curValue = val;
-            },
-            immediate: true,
-        },
-    },
-};
+});
 </script>

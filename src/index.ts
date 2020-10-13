@@ -25,8 +25,8 @@ import Alert from "./components/alert/index";
 // import FormItem from "./components/form-item/index";
 // import Input from "./components/input/index";
 // import InputNumber from "./components/input-number/index";
-// import Radio from "./components/radio/index";
-// import RadioGroup from "./components/radio-group/index";
+import Radio from "./components/radio/index";
+import RadioGroup from "./components/radio-group/index";
 import Checkbox from "./components/checkbox/index";
 import CheckboxGroup from "./components/checkbox-group/index";
 // import Select from "./components/select/index";
@@ -70,8 +70,8 @@ const components = [
     // FormItem,
     // Input,
     // InputNumber,
-    // Radio,
-    // RadioGroup,
+    Radio,
+    RadioGroup,
     Checkbox,
     CheckboxGroup,
     // Select,

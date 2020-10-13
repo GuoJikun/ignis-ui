@@ -288,16 +288,34 @@
                     <p>
                         单独使用一个checkbox时，默认是boolean类型，选中为true；可以通过true-label和false-label来改变
                     </p>
-                    <ins-checkbox v-model:value="checkboxValue" label="">同意注册协议</ins-checkbox>
+                    <ins-checkbox v-model:value="checkboxValue">同意注册协议</ins-checkbox>
                 </div>
-                <div>
+                <div class="mt-14">
                     <p>使用checkboxGroup</p>
-                    <p>{{ checkboxArray }}</p>
+                    <p>选中的值：{{ checkboxArray }}</p>
                     <ins-checkbox-group v-model:value="checkboxArray">
                         <ins-checkbox label="apple">Apple</ins-checkbox>
                         <ins-checkbox label="banana">Banana</ins-checkbox>
                         <ins-checkbox label="orange">Orange</ins-checkbox>
                     </ins-checkbox-group>
+                </div>
+            </div>
+        </div>
+        <div class="layout-item">
+            <p class="title">Radio 单选框</p>
+            <div class="layout-item-body">
+                <div>
+                    <ins-radio v-model:value="radioValue" label="apple">Apple</ins-radio>
+                    <ins-radio v-model:value="radioValue" label="banana">Banana</ins-radio>
+                </div>
+                <div class="mt-14">
+                    <p>使用checkboxGroup</p>
+                    <p>选中的值：{{ radioValue1 }}</p>
+                    <ins-radio-group v-model:value="radioValue1">
+                        <ins-radio label="apple">Apple</ins-radio>
+                        <ins-radio label="banana">Banana</ins-radio>
+                        <ins-radio label="orange">Orange</ins-radio>
+                    </ins-radio-group>
                 </div>
             </div>
         </div>
@@ -321,6 +339,8 @@ export default defineComponent({
             drawerValue: false,
             checkboxValue: true,
             checkboxArray: ["apple"],
+            radioValue: "apple",
+            radioValue1: "apple",
         };
     },
     methods: {
@@ -384,5 +404,8 @@ p {
 }
 .mt-20 {
     margin-top: 20px;
+}
+.mt-14 {
+    margin-top: 14px;
 }
 </style>

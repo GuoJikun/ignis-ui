@@ -46,6 +46,8 @@ Vue.use(insUI)
 -   TimelineItem
 -   Steps
 -   Step
+-   Radio
+-   RadioGroup
 -   Checkbox
 -   CheckboxGroup
 -   Rate
@@ -63,8 +65,6 @@ Vue.use(insUI)
 -   Tooltip
 -   Message
 -   Notification
--   Radio
--   RadioGroup
 -   Table
 -   Upload
 -   Badge

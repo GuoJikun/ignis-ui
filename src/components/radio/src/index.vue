@@ -1,8 +1,18 @@
 <template>
     <label class="ins-radio" :class="[]">
-        <span class="ins-radio__input" :class="[{ 'is-checked': isChecked }, { 'is-disabled': isDisabled }]">
+        <span
+            class="ins-radio__input"
+            :class="[{ 'is-checked': isChecked }, { 'is-disabled': isDisabled }]"
+        >
             <span class="ins-radio__inner"></span>
-            <input :value="label" :name="names" type="radio" tabIndex="-1" hidden @change="handleChange" />
+            <input
+                :value="label"
+                :name="names"
+                type="radio"
+                tabIndex="-1"
+                hidden
+                @change="handleChange"
+            />
         </span>
 
         <span class="ins-radio__label">
@@ -11,92 +21,79 @@
     </label>
 </template>
 
-<script>
-import { prefix } from "@/utils/assist.js";
-import Emitter from "@/mixins-/emitter.js";
-import { findComponentUpward } from "@/utils/findComponent.js";
-export default {
+<script lang="ts">
+import { prefix } from "@/utils/assist";
+import { computed, defineComponent, inject, reactive, toRefs, watchEffect } from "vue";
+
+export default defineComponent({
     name: `${prefix}Radio`,
-    mixins-: [Emitter],
-    model: {
-        props: "value",
-        event: "change",
-    },
-    componentName: `${prefix}Radio`,
     props: {
-        value: {
-            type: [Number, String, Boolean],
-        },
-        label: {
-            type: [String, Number, Boolean],
-        },
-        disabled: {
-            type: Boolean,
-            default: false,
-        },
+        value: [String, Number, Boolean],
+        label: [String, Number, Boolean],
+
+        disabled: Boolean,
         name: String,
     },
-    data() {
-        return {
-            curValue: null,
-        };
-    },
-    methods: {
-        handleChange(ev) {
-            if (this.isDisabled) {
-                return false;
-            }
-            const parent = findComponentUpward(this, "RadioGroup");
-            if (parent) {
-                parent.updateValue(this.label);
+    setup(props, { emit }) {
+        const parent: any = inject("parent");
+        const data = reactive({
+            curValue: props.value,
+        });
+
+        const isDisabled = computed(() => {
+            const parentInstance = parent;
+            if (parentInstance) {
+                return parentInstance.disabled;
             } else {
-                this.curValue = ev.target.value;
-                this.$emit("change", this.curValue);
-                this.dispatch("FormItem", "on-form-change", this.curValue);
+                return props.disabled;
             }
-        },
-    },
-    computed: {
-        isChecked() {
+        });
+
+        const isChecked = computed(() => {
             let bool = false;
-            const parent = findComponentUpward(this, "RadioGroup");
-            if (parent) {
-                bool = parent.curValue === this.label;
+            const parentInstance = parent;
+            if (parentInstance) {
+                bool = parentInstance.value === props.label;
             } else {
-                bool = this.curValue === this.label;
+                bool = data.curValue === props.label;
             }
 
             return bool;
-        },
-        names() {
-            const parent = findComponentUpward(this, "RadioGroup");
-            const flag = parent && parent.$options.name === "RadioGroup";
-            if (flag) {
-                return this.name || parent.value;
+        });
+
+        const names = computed(() => {
+            const parentInstance = parent;
+            if (parentInstance) {
+                return parentInstance.name || parentInstance.value;
             } else {
-                return this.name || this.curValue;
+                return props.name || data.curValue;
             }
-        },
-        isDisabled() {
-            const parent = findComponentUpward(this, "RadioGroup");
-            const flag = parent && parent.$options.name === "RadioGroup";
-            if (flag) {
-                return parent.disabled;
+        });
+
+        const handleChange = () => {
+            if (isDisabled.value) {
+                return false;
+            }
+            const parentInstance: any = parent;
+            if (parentInstance) {
+                parentInstance.updateValue(props.label);
             } else {
-                return this.disabled;
+                data.curValue = props.label;
+                emit("change", data.curValue);
+                emit("update:value", data.curValue);
+                // this.dispatch("FormItem", "on-form-change", this.curValue);
             }
-        },
+        };
+
+        watchEffect(() => {
+            data.curValue = props.value;
+        });
+
+        return { ...toRefs(data), parent, handleChange, isChecked, isDisabled, names };
     },
-    watch: {
-        value: {
-            handler(val) {
-                this.curValue = val;
-            },
-            immediate: true,
-        },
-    },
-};
+});
 </script>
+
 <style lang="scss">
 @import "@/style/common/var.scss";
 
