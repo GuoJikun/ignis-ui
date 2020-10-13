@@ -4,46 +4,42 @@
     </div>
 </template>
 
-<script>
-import { prefix } from "@/utils/assist.js";
-import Emitter from "@/mixins-/emitter.js";
-export default {
+<script lang="ts">
+import { prefix } from "@/utils/assist";
+import { defineComponent, reactive, toRefs } from "vue";
+
+export default defineComponent({
     name: `${prefix}CheckboxGroup`,
-    mixins-: [Emitter],
-    model: {
-        props: "value",
-        event: "change",
-    },
+
     props: {
-        value: {
-            type: Array,
-            default() {
-                return [];
-            },
-        },
+        value: Array,
     },
-    data() {
+    provide() {
         return {
-            curValue: this.value,
+            parent: this,
         };
     },
-    mounted() {
-        this.init();
+    setup(props) {
+        const data = reactive({
+            curValue: props.value || [],
+        });
+        return {
+            ...toRefs(data),
+        };
     },
     methods: {
-        init() {
-            this.curValue = this.value;
-        },
-        addValue(val) {
+        addValue(val: any) {
             this.curValue.push(val);
             this.$emit("change", this.curValue);
-            this.dispatch("FormItem", "on-form-change", this.curValue);
+            this.$emit("update:value", this.curValue);
+            // this.dispatch("FormItem", "on-form-change", this.curValue);
         },
-        removeValue(val) {
+        removeValue(val: any) {
             const index = this.curValue.indexOf(val);
             this.curValue.splice(index, 1);
             this.$emit("change", this.curValue);
-            this.dispatch("FormItem", "on-form-change", this.curValue);
+            this.$emit("update:value", this.curValue);
+            // this.dispatch("FormItem", "on-form-change", this.curValue);
         },
     },
     watch: {
@@ -51,7 +47,7 @@ export default {
             this.curValue = val;
         },
     },
-};
+});
 </script>
 
 <style lang="scss" scoped>

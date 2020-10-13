@@ -20,22 +20,22 @@
 
 <script lang="ts">
 import { prefix } from "@/utils/assist";
-import { findComponentUpward } from "@/utils/findComponent";
-import { defineComponent } from "vue";
+import { computed, defineComponent, inject, reactive, toRefs } from "vue";
 
 export default defineComponent({
     name: `${prefix}Checkbox`,
 
     props: {
-        value: {
-            type: [Number, String, Boolean],
+        value: [String, Number, Boolean],
+        label: [String, Number, Boolean],
+        trueLabel: {
+            type: [String, Number, Boolean],
+            default: true,
         },
-        label: {
+        falseLabel: {
             type: [String, Number, Boolean],
             default: false,
         },
-        trueLabel: [String, Number],
-        falseLabel: [String, Number],
         disabled: {
             type: Boolean,
             default: false,
@@ -45,50 +45,46 @@ export default defineComponent({
             default: false,
         },
     },
-    data() {
-        return {
-            curValue: null,
-        };
-    },
-    methods: {
-        handleChange() {
-            if (this.disabled) {
-                return false;
-            }
-            const parent = findComponentUpward(this, "CheckboxGroup");
-            if (parent) {
-                const checked = !this.isChecked;
-                if (checked) {
-                    parent.addValue(this.label);
-                } else {
-                    parent.removeValue(this.label);
-                }
-            } else {
-                this.curValue = !this.isChecked;
-                const value = this.getCheckedValue(this.curValue);
-                this.$emit("change", value);
-                this.dispatch("FormItem", "on-form-change", value);
-            }
-        },
-        getCheckedValue(val: null) {
-            const trueValue = this.trueLabel || true;
-            const falseValue = this.falseLabel || false;
-            const value = val ? trueValue : falseValue;
-            return value;
-        },
-    },
-    computed: {
-        isChecked(): boolean {
+    setup(props, { emit }) {
+        const parent: any = inject("parent");
+        const data: any = reactive({
+            curValue: props.value,
+        });
+
+        const isChecked = computed(() => {
             let bool: any = false;
-            const parent = findComponentUpward(this, "CheckboxGroup");
-            if (parent) {
-                bool = parent.curValue.includes(this.label);
+            const parentInstance = parent;
+            if (parentInstance) {
+                bool = parentInstance.curValue.includes(props.label);
             } else {
-                if (this.trueLabel) bool = this.value == this.trueLabel;
-                else bool = this.value;
+                bool = props.value === props.trueLabel;
             }
             return bool;
-        },
+        });
+        const handleChange = () => {
+            if (props.disabled) {
+                return false;
+            }
+            const parentInstance = parent;
+            const checked = isChecked.value;
+            if (parentInstance) {
+                if (checked) {
+                    parent.removeValue(props.label);
+                } else {
+                    parent.addValue(props.label);
+                }
+            } else {
+                if (checked) {
+                    data.curValue = props.falseLabel;
+                } else {
+                    data.curValue = props.trueLabel;
+                }
+                emit("update:value", data.curValue);
+                emit("change", data.curValue);
+                // this.dispatch("FormItem", "on-form-change", value);
+            }
+        };
+        return { ...toRefs(data), parent, handleChange, isChecked };
     },
 });
 </script>

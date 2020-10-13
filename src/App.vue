@@ -281,6 +281,26 @@
                 </ins-drawer>
             </div>
         </div>
+        <div class="layout-item">
+            <p class="title">Checkbox 多选框</p>
+            <div class="layout-item-body">
+                <div>
+                    <p>
+                        单独使用一个checkbox时，默认是boolean类型，选中为true；可以通过true-label和false-label来改变
+                    </p>
+                    <ins-checkbox v-model:value="checkboxValue" label="">同意注册协议</ins-checkbox>
+                </div>
+                <div>
+                    <p>使用checkboxGroup</p>
+                    <p>{{ checkboxArray }}</p>
+                    <ins-checkbox-group v-model:value="checkboxArray">
+                        <ins-checkbox label="apple">Apple</ins-checkbox>
+                        <ins-checkbox label="banana">Banana</ins-checkbox>
+                        <ins-checkbox label="orange">Orange</ins-checkbox>
+                    </ins-checkbox-group>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -299,6 +319,8 @@ export default defineComponent({
             rateValue: 1,
             switchValue: true,
             drawerValue: false,
+            checkboxValue: true,
+            checkboxArray: ["apple"],
         };
     },
     methods: {
