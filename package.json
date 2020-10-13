@@ -1,7 +1,7 @@
 {
   "name": "uikit",
   "version": "0.1.0",
-  "description": "vue通用组件库；ins-design；foxDesign",
+  "description": "vue3,vue通用组件库；ins-design；foxDesign",
   "author": "guojikun",
   "scripts": {
     "serve": "npm run serve:lib && npm run serve:docs",
@@ -50,17 +50,15 @@
     "vue-jest": "^5.0.0-0"
   },
   "keywords": [
+    "vue3",
     "vue",
     "component",
     "components",
-    "ins-design",
-    "foxDesign",
-    "fox",
-    "foxUI",
-    "foxUi",
-    "foxui",
+    "ins-ui",
+    "insUI",
     "ins-ui",
     "ui",
+    "uikit",
     "view"
   ],
   "license": "MIT"
