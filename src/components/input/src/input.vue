@@ -49,19 +49,14 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
 import { prefix } from "@/utils/assist";
 import InsIcon from "@/components/icon/index";
-import Emitter from "@/mixins/emitter";
+import { computed, defineComponent, reactive, toRefs, watchEffect } from "vue";
 
-export default {
+export default defineComponent({
     name: `${prefix}Input`,
     components: { InsIcon },
-    mixins: [Emitter],
-    model: {
-        props: "value",
-        event: "change",
-    },
     props: {
         value: [String, Number],
         clearable: Boolean,
@@ -81,65 +76,74 @@ export default {
         },
         size: {
             type: String,
-            validator(value) {
-                return ["large", "small", "mini", "default"].indexOf(value) !== -1;
+            validator: (value: string) => {
+                return ["large", "small", "mini", "default"].includes(value);
             },
         },
         max: Number,
         min: Number,
         placeholder: String,
     },
-    data() {
-        return {
-            cur: this.value,
-            isFocus: false,
+    setup(props, { emit }) {
+        const data: Record<string, any> = reactive({ cur: props.value, isFocus: false });
+        const handleClose = () => {
+            data.isFocus = false;
         };
-    },
-    methods: {
-        mouseEnter() {
-            this.isFocus = true;
-        },
-        mouseLeave() {
-            this.isFocus = false;
-        },
-        fixed(ev) {
-            this.$emit("focus", ev);
-        },
-        blur(ev) {
-            this.$emit("blur", ev);
-            this.dispatch("FormItem", "on-form-blur", this.cur);
-        },
-        inputs(ev) {
-            this.cur = ev.target.value;
-            this.$emit("change", this.cur);
-            this.$emit("input", this.cur);
-            this.dispatch("FormItem", "on-form-change", ev.target.value);
-        },
-        clear() {
-            this.cur = null;
-            this.$emit("change", this.cur);
-            this.dispatch("FormItem", "on-form-change", this.cur);
-            this.$emit("clear");
-        },
-    },
-    computed: {
-        isClose() {
-            return this.clearable && this.isFocus && this.cur;
-        },
-        getSize() {
-            if (this.size) {
-                return `ins-input--${this.size}`;
+        // computed
+        const isClose = computed(() => {
+            return props.clearable && data.isFocus && data.cur;
+        });
+        const getSize = computed(() => {
+            if (props.size) {
+                return `ins-input-${props.size}`;
             } else {
                 return "";
             }
-        },
+        });
+        // watch
+        watchEffect(() => {
+            data.cur = props.value;
+        });
+        // methods
+        const mouseEnter = () => {
+            data.isFocus = true;
+        };
+        const mouseLeave = () => {
+            data.isFocus = false;
+        };
+        const fixed = () => {
+            emit("focus", data.cur);
+        };
+        const blur = () => {
+            emit("blur", data.cur);
+            // this.dispatch("FormItem", "on-form-blur", this.cur);
+        };
+        const inputs = () => {
+            data.cur = props.value;
+            emit("change", data.cur);
+            emit("input", data.cur);
+            // this.dispatch("FormItem", "on-form-change", ev.target.value);
+        };
+        const clear = () => {
+            data.cur = null;
+            emit("change", data.cur);
+            // this.dispatch("FormItem", "on-form-change", this.cur);
+            emit("clear");
+        };
+        return {
+            ...toRefs(data),
+            handleClose,
+            isClose,
+            getSize,
+            mouseEnter,
+            mouseLeave,
+            fixed,
+            blur,
+            clear,
+            inputs,
+        };
     },
-    watch: {
-        value(val) {
-            this.cur = val;
-        },
-    },
-};
+});
 </script>
 
 <style lang="scss">
