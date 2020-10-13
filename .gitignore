@@ -1,7 +1,7 @@
 .DS_Store
 node_modules
-/dist
-/ui
+dist
+ui
 
 
 # local env files
