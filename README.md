@@ -1,5 +1,7 @@
 # ins-ui
 
+一个适用于 vue3 的组件库 [github](https://github.com/GuoJikun/ignis-ui)
+
 ## 使用
 
 ### 安装
