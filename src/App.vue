@@ -319,6 +319,12 @@
                 </div>
             </div>
         </div>
+        <div class="layout-item">
+            <p class="title">Input 输入框</p>
+            <div class="layout-item-body">
+                <ins-input v-model="inputValue" clearable></ins-input>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -341,6 +347,7 @@ export default defineComponent({
             checkboxArray: ["apple"],
             radioValue: "apple",
             radioValue1: "apple",
+            inputValue: "123",
         };
     },
     methods: {
@@ -348,7 +355,6 @@ export default defineComponent({
             console.log(val, this.value);
         },
         showHide() {
-            console.log("test", this.test, 2);
             if (this.test === true) {
                 this.test = false;
             } else {

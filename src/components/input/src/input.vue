@@ -58,7 +58,7 @@ export default defineComponent({
     name: `${prefix}Input`,
     components: { InsIcon },
     props: {
-        value: [String, Number],
+        modelValue: [String, Number],
         clearable: Boolean,
         disabled: {
             type: Boolean,
@@ -84,8 +84,9 @@ export default defineComponent({
         min: Number,
         placeholder: String,
     },
-    setup(props, { emit }) {
-        const data: Record<string, any> = reactive({ cur: props.value, isFocus: false });
+    setup(props, { emit, attrs }) {
+        console.log(attrs, "attrs");
+        const data: Record<string, any> = reactive({ cur: props.modelValue, isFocus: false });
         const handleClose = () => {
             data.isFocus = false;
         };
@@ -102,7 +103,7 @@ export default defineComponent({
         });
         // watch
         watchEffect(() => {
-            data.cur = props.value;
+            data.cur = props.modelValue;
         });
         // methods
         const mouseEnter = () => {
@@ -119,7 +120,7 @@ export default defineComponent({
             // this.dispatch("FormItem", "on-form-blur", this.cur);
         };
         const inputs = () => {
-            data.cur = props.value;
+            data.cur = props.modelValue;
             emit("change", data.cur);
             emit("input", data.cur);
             // this.dispatch("FormItem", "on-form-change", ev.target.value);

@@ -23,7 +23,7 @@ import Alert from "./components/alert/index";
 // form组件
 // import Form from "./components/form/index";
 // import FormItem from "./components/form-item/index";
-// import Input from "./components/input/index";
+import Input from "./components/input/index";
 // import InputNumber from "./components/input-number/index";
 import Radio from "./components/radio/index";
 import RadioGroup from "./components/radio-group/index";
@@ -68,7 +68,7 @@ const components = [
 
     // Form,
     // FormItem,
-    // Input,
+    Input,
     // InputNumber,
     Radio,
     RadioGroup,

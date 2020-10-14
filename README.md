@@ -48,6 +48,7 @@ Vue.use(insUI)
 -   TimelineItem
 -   Steps
 -   Step
+-   Input
 -   Radio
 -   RadioGroup
 -   Checkbox
@@ -58,7 +59,6 @@ Vue.use(insUI)
 
 ### 未完成组件
 
--   Input
 -   Select
 -   Form
 -   FormItem
