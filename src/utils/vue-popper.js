@@ -77,9 +77,9 @@ export default {
                 return;
             }
 
-            const options = this.options;
-            const popper = this.popper || this.$refs.popper;
-            const reference = this.reference || this.$refs.reference;
+            const options = props.options;
+            const popper = props.popper;
+            const reference = props.reference;
 
             if (!popper || !reference) return;
 
