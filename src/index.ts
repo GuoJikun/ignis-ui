@@ -29,8 +29,8 @@ import Radio from "./components/radio/index";
 import RadioGroup from "./components/radio-group/index";
 import Checkbox from "./components/checkbox/index";
 import CheckboxGroup from "./components/checkbox-group/index";
-// import Select from "./components/select/index";
-// import Option from "./components/option/index";
+import Select from "./components/select/index";
+import Option from "./components/option/index";
 import Switch from "./components/switch/index";
 // import DatePicker from "./components/datepicker/index";
 import Rate from "./components/rate/index";
@@ -74,8 +74,8 @@ const components = [
     RadioGroup,
     Checkbox,
     CheckboxGroup,
-    // Select,
-    // Option,
+    Select,
+    Option,
     Switch,
     // DatePicker,
     Rate,

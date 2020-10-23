@@ -29,9 +29,10 @@ import { oneOf } from "@/utils/assist.js";
 import Popper from "@/utils/vue-popper.js";
 import { transferIndex, transferIncrease } from "@/utils/transfer-queue";
 const prefixCls = "ins-tooltip";
+
 export default {
     name: `${prefix}Tooltip`,
-    mixins-: [Popper],
+    mixins: [Popper],
     props: {
         placement: {
             validator(value) {

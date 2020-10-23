@@ -325,6 +325,15 @@
                 <ins-input v-model="inputValue" clearable></ins-input>
             </div>
         </div>
+        <div class="layout-item">
+            <p class="title">Select 下拉选择器</p>
+            <div class="layout-item-body">
+                <ins-select v-model="selectValue">
+                    <ins-option label="apple" value="apple"></ins-option>
+                    <ins-option label="banana" value="banana"></ins-option>
+                </ins-select>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -348,6 +357,7 @@ export default defineComponent({
             radioValue: "apple",
             radioValue1: "apple",
             inputValue: "123",
+            selectValue: "",
         };
     },
     methods: {

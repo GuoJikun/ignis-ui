@@ -7,7 +7,7 @@ export default defineComponent({
             type: String,
             default: "bottom",
             validator: (value: string) => {
-                const reg = /^(left|top|bottom\right)(-start|-end))?$/;
+                const reg = /^(left|top|bottom|right)(-start|-end)?$/g;
                 return reg.test(value);
             },
         },
@@ -24,15 +24,10 @@ export default defineComponent({
             },
         },
     },
-    setup(props, { emit, attrs }) {
-        console.log(attrs, "attrs");
+    setup(props, { emit }) {
         let popperJS: any = null;
         const createPopperjs = () => {
             if (!window) return;
-            // eslint-disable-next-line prettier/prettier
-            if (!/^(top|bottom|left|right)(-start|-end)?$/g.test(props.placement)) {
-                return;
-            }
 
             const options = props.options;
             const popper = props.popper;
@@ -40,9 +35,9 @@ export default defineComponent({
 
             if (!popper || !reference) return;
 
-            /* if (this.popperJS && this.popperJS.hasOwnProperty("destroy")) {
-                this.popperJS.destroy();
-            } */
+            if (popperJS && popperJS.destroy) {
+                popperJS.destroy();
+            }
             if (popperJS) {
                 popperJS.destroy();
             }
@@ -61,7 +56,6 @@ export default defineComponent({
             popperJS = createPopper(reference, popper, options);
         };
         const updatePopper = () => {
-            if (!window) return;
             popperJS ? popperJS.update() : createPopperjs();
         };
 

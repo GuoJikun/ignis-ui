@@ -36,3 +36,12 @@ export function getScrollWidth() {
     }, 10);
     return scrollWidth - scrollInWidth;
 }
+/**
+ * 类型判断
+ * @param value
+ */
+export function typeOf(value: any) {
+    const initType = Object.prototype.toString.call(value);
+    const type = initType.replace(/^(\[object )([a-zA-Z]+)(\])$/, "$2").toLowerCase();
+    return type;
+}

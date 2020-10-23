@@ -6,48 +6,49 @@
     </li>
 </template>
 
-<script>
-import { prefix } from "@/utils/assist.js";
-import { findComponentUpward } from "@/utils/findComponent.js";
+<script lang="ts">
+import { prefix, typeOf } from "@/utils/assist";
+import { computed, defineComponent, inject, onMounted } from "vue";
 
-export default {
+export default defineComponent({
     name: `${prefix}Option`,
     props: {
         value: [String, Number],
         label: String,
         disabled: Boolean,
     },
-    inject: {
-        select: {
-            default: {},
-        },
+    setup(props) {
+        const parent: any = inject("parent");
+
+        const isObject = computed(() => {
+            return typeOf(props.value) === "string";
+        });
+
+        const currentValue = computed(() => {
+            return props.value || props.label || "";
+        });
+
+        const currentLabel = computed(() => {
+            return props.label || (isObject.value ? "" : props.value);
+        });
+
+        const handClick = () => {
+            const parentInstance: any = parent;
+            parentInstance.visiable = false;
+            parentInstance.handChange(currentValue, currentLabel);
+        };
+
+        onMounted(() => {
+            const parentInstance = parent;
+            const value = parentInstance.modelValue;
+            if (currentValue.value === value) {
+                parent.handChange(currentValue.value, currentLabel.value);
+            }
+        });
+
+        return { parent, currentValue, currentLabel, handClick };
     },
-    computed: {
-        isObject() {
-            return Object.prototype.toString.call(this.value).toLowerCase() === "[object object]";
-        },
-        currentLabel() {
-            return this.label || (this.isObject ? "" : this.value);
-        },
-        currentValue() {
-            return this.value || this.label || "";
-        },
-    },
-    methods: {
-        handClick() {
-            const parent = findComponentUpward(this, "FoxSelect");
-            parent.visiable = false;
-            parent.handChange(this.currentValue, this.currentLabel);
-        },
-    },
-    mounted() {
-        const parent = findComponentUpward(this, "FoxSelect");
-        const value = parent.value;
-        if (this.currentValue === value) {
-            parent.handChange(this.currentValue, this.currentLabel);
-        }
-    },
-};
+});
 </script>
 
 <style lang="scss">

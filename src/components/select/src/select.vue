@@ -1,63 +1,71 @@
 <template>
     <div :class="['ins-select', { 'is-focus': rotate }]" v-clickoutside="handClose">
         <ins-input
-            @click.native="handClick"
+            @click="handClick"
             v-model="label"
             suffix-icon="chevron-down"
             :disabled="disabled"
             :placeholder="placeholder"
         ></ins-input>
         <transition name="ins-zoom-in-top">
-            <div v-show="visiable" class="ins-transfer">
+            <ins-dropdown v-show="visiable" :reference="el" class="ins-transfer">
                 <ul ref="scrollbar" class="ins-select__scroll">
                     <slot></slot>
                 </ul>
                 <p class="el-select-dropdown__empty" v-if="emptyText">
                     {{ emptyText }}
                 </p>
-            </div>
+            </ins-dropdown>
         </transition>
     </div>
 </template>
-<script>
-import { prefix } from "@/utils/assist.js";
-import Clickoutside from "@/directives/clickoutside.js";
-import FoxInput from "@/components/input";
-export default {
+<script lang="ts">
+import { prefix } from "@/utils/assist";
+import Clickoutside from "@/directives/clickoutside";
+import InsInput from "@/components/input";
+import InsDropdown from "@/components/dropdown";
+import { defineComponent, reactive, toRefs } from "vue";
+
+export default defineComponent({
     name: `${prefix}Select`,
-    components: { FoxInput },
+    components: { InsInput, InsDropdown },
     directives: { Clickoutside },
-    model: {
-        prop: "value",
-        event: "change",
-    },
+
     props: {
         emptyText: String,
-        value: [String, Number],
+        modelValue: [String, Number],
         disabled: Boolean,
         placeholder: {
             type: String,
             default: "请选择",
         },
+        valueKey: String,
     },
-    data() {
-        return {
+    setup() {
+        const data: { [x: string]: any } = reactive({
             visiable: false,
             label: null,
             rotate: false,
+            el: null,
+        });
+        return {
+            ...toRefs(data),
         };
     },
     provide() {
-        return this;
+        return {
+            parent: this,
+        };
+    },
+    beforeMount() {
+        this.el = this.$el;
+        console.log(this.$el);
     },
     methods: {
         handClose() {
             console.log("123");
             this.visiable = false;
             this.rotate = false;
-        },
-        handleMenuEnter() {
-            this.$nextTick(() => this.scrollToOption(this.selected));
         },
         handClick() {
             if (this.disabled) {
@@ -66,12 +74,12 @@ export default {
             this.visiable = true;
             this.rotate = true;
         },
-        handChange(val, label) {
+        handChange(val: string | number, label: string) {
             this.label = label;
             this.$emit("change", val || null);
         },
     },
-};
+});
 </script>
 <style lang="scss">
 .ins-select {
@@ -92,7 +100,7 @@ export default {
 }
 
 .ins-transfer {
-    position: absolute;
+    /* position: absolute;
     left: 0;
     top: 36px;
     background-color: #fff;
@@ -101,6 +109,6 @@ export default {
     box-sizing: border-box;
     border: 1px solid #efefef;
     border-radius: 4px;
-    height: 183px;
+    height: 183px; */
 }
 </style>
