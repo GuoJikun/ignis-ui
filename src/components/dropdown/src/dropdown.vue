@@ -1,5 +1,5 @@
 <template>
-    <div id="tooltip" class="ins-transfer" :data-popper-placement="placement">
+    <div id="tooltip" class="ins-transfer" :data-popper-placement="placement" ref="insDropdown">
         <div data-popper-arrow id="arrow"></div>
         <div class="ins-transfer-warp">
             <slot></slot>
@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, reactive, toRefs } from "vue";
+import { defineComponent, inject, reactive, ref, toRefs } from "vue";
 import { createPopper } from "@popperjs/core";
 
 export default defineComponent({
@@ -58,19 +58,23 @@ export default defineComponent({
     setup() {
         const parent: any = inject("parent");
 
-        const data: any = reactive({
-            popperJS: null,
-        });
+        const insDropdown = ref<null | HTMLElement>(null);
+
+        const popperJS: any = ref(null);
         return {
             parent,
-            ...toRefs(data),
+            popperJS,
+            insDropdown,
         };
+    },
+    mounted() {
+        this.createPopperjs();
     },
     methods: {
         createPopperjs() {
             const options = this.options;
             const popper = this.$el;
-            const reference = this.reference || this.parent.el;
+            const reference = this.reference;
 
             // console.log(!popper, this.parent.el);
             if (!popper || !reference) return;

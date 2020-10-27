@@ -1414,10 +1414,10 @@
   resolved "https://registry.yarnpkg.com/@vue/babel-helper-vue-transform-on/-/babel-helper-vue-transform-on-1.0.0-rc.2.tgz#7246341f666e7c6e65b13da420e2ce85714fbbca"
   integrity sha512-1+7CwjQ0Kasml6rHoNQUmbISwqLNNfFVBUcZl6QBremUl296ZmLrVQPqJP5pyAAWjZke5bpI1hlj+LVVuT7Jcg==
 
-"@vue/babel-plugin-jsx@^1.0.0-0":
+"@vue/babel-plugin-jsx@^1.0.0-0", "@vue/babel-plugin-jsx@^1.0.0-rc.3":
   version "1.0.0-rc.3"
-  resolved "https://registry.yarnpkg.com/@vue/babel-plugin-jsx/-/babel-plugin-jsx-1.0.0-rc.3.tgz#ab477ee95c764fbe68842a2eddd474f122e70ac6"
-  integrity sha512-/Ibq0hoKsidnHWPhgRpjcjYhYcHpqEm2fiKVAPO88OXZNHGwaGgS4yXkC6TDEvlZep4mBDo+2S5T81wpbVh90Q==
+  resolved "https://registry.npm.taobao.org/@vue/babel-plugin-jsx/download/@vue/babel-plugin-jsx-1.0.0-rc.3.tgz?cache=0&sync_timestamp=1600074512200&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40vue%2Fbabel-plugin-jsx%2Fdownload%2F%40vue%2Fbabel-plugin-jsx-1.0.0-rc.3.tgz#ab477ee95c764fbe68842a2eddd474f122e70ac6"
+  integrity sha1-q0d+6Vx2T75ohCou3dR08SLnCsY=
   dependencies:
     "@babel/helper-module-imports" "^7.0.0"
     "@babel/plugin-syntax-jsx" "^7.0.0"
@@ -1530,10 +1530,10 @@
   resolved "https://registry.yarnpkg.com/@vue/cli-overlay/-/cli-overlay-4.5.8.tgz#5b71b81bd490b9b596cfdda78f90155643e037d4"
   integrity sha512-M6q4QPKQfErHk54ycxBASgBadgdsK45f6v2NWUTAiFXdTtqv1Z7gR8JAbQhiXbni/m9571bLJnZFv5c8uhAHnw==
 
-"@vue/cli-plugin-babel@^4.5.7":
+"@vue/cli-plugin-babel@~4.5.8":
   version "4.5.8"
-  resolved "https://registry.yarnpkg.com/@vue/cli-plugin-babel/-/cli-plugin-babel-4.5.8.tgz#5759e0d24c568cb145e7d0b307497ce64f472cb0"
-  integrity sha512-2quuLuCZq2vH29xfp66L5YfUxQvyMX9te5jMslfQGVzvUmFpPbz8ceioZYW9+VqWjg8pzqSuBE+ANJLWdy2RtQ==
+  resolved "https://registry.npm.taobao.org/@vue/cli-plugin-babel/download/@vue/cli-plugin-babel-4.5.8.tgz?cache=0&sync_timestamp=1603102511178&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40vue%2Fcli-plugin-babel%2Fdownload%2F%40vue%2Fcli-plugin-babel-4.5.8.tgz#5759e0d24c568cb145e7d0b307497ce64f472cb0"
+  integrity sha1-V1ng0kxWjLFF59CzB0l85k9HLLA=
   dependencies:
     "@babel/core" "^7.11.0"
     "@vue/babel-preset-app" "^4.5.8"
@@ -1543,10 +1543,10 @@
     thread-loader "^2.1.3"
     webpack "^4.0.0"
 
-"@vue/cli-plugin-eslint@^4.5.7":
+"@vue/cli-plugin-eslint@~4.5.8":
   version "4.5.8"
-  resolved "https://registry.yarnpkg.com/@vue/cli-plugin-eslint/-/cli-plugin-eslint-4.5.8.tgz#fce1ed659dbb50de7477592591348cf29f3353ff"
-  integrity sha512-1lg3K2D/harXbN4FvRoA1b0X9947H+G4Ql/43rxJY39OqswfK/d1ck438Fo9M4l1+zhBSUNDmcjn7Q2EH6qWmA==
+  resolved "https://registry.npm.taobao.org/@vue/cli-plugin-eslint/download/@vue/cli-plugin-eslint-4.5.8.tgz?cache=0&sync_timestamp=1603102675148&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40vue%2Fcli-plugin-eslint%2Fdownload%2F%40vue%2Fcli-plugin-eslint-4.5.8.tgz#fce1ed659dbb50de7477592591348cf29f3353ff"
+  integrity sha1-/OHtZZ27UN50d1klkTSM8p8zU/8=
   dependencies:
     "@vue/cli-shared-utils" "^4.5.8"
     eslint-loader "^2.2.1"
@@ -1562,10 +1562,10 @@
   dependencies:
     "@vue/cli-shared-utils" "^4.5.8"
 
-"@vue/cli-plugin-typescript@^4.5.7":
+"@vue/cli-plugin-typescript@~4.5.8":
   version "4.5.8"
-  resolved "https://registry.yarnpkg.com/@vue/cli-plugin-typescript/-/cli-plugin-typescript-4.5.8.tgz#f1057f90892ae18c4ebfe879f5f52083d54be5f8"
-  integrity sha512-JSBLG1EBqg2e3o7+wtFu1xzP/jNs6jibVC82Q4wB6n/+VYNsFxUNCrz4GpebHg6AB+UCAyGq2EK/NhcwoNypqA==
+  resolved "https://registry.npm.taobao.org/@vue/cli-plugin-typescript/download/@vue/cli-plugin-typescript-4.5.8.tgz#f1057f90892ae18c4ebfe879f5f52083d54be5f8"
+  integrity sha1-8QV/kIkq4YxOv+h59fUgg9VL5fg=
   dependencies:
     "@types/webpack-env" "^1.15.2"
     "@vue/cli-shared-utils" "^4.5.8"
@@ -1580,10 +1580,10 @@
   optionalDependencies:
     fork-ts-checker-webpack-plugin-v5 "npm:fork-ts-checker-webpack-plugin@^5.0.11"
 
-"@vue/cli-plugin-unit-jest@^4.5.7":
+"@vue/cli-plugin-unit-jest@~4.5.8":
   version "4.5.8"
-  resolved "https://registry.yarnpkg.com/@vue/cli-plugin-unit-jest/-/cli-plugin-unit-jest-4.5.8.tgz#0310d48b61cd922f8cc7d7898d02a5b5dbc33e87"
-  integrity sha512-B3MqSf4Wp3x2Qoy7/1MqNasjgsqa5pOocCzljtvCR2uwF+i+MKRsw8dhAr/0ikarRehwVcl2WMVtlJoNJ1zX1A==
+  resolved "https://registry.npm.taobao.org/@vue/cli-plugin-unit-jest/download/@vue/cli-plugin-unit-jest-4.5.8.tgz#0310d48b61cd922f8cc7d7898d02a5b5dbc33e87"
+  integrity sha1-AxDUi2HNki+Mx9eJjQKltdvDPoc=
   dependencies:
     "@babel/core" "^7.11.0"
     "@babel/plugin-transform-modules-commonjs" "^7.9.6"
@@ -1606,10 +1606,10 @@
   resolved "https://registry.yarnpkg.com/@vue/cli-plugin-vuex/-/cli-plugin-vuex-4.5.8.tgz#8122ae93bf59327d3a0063c0c6da51513a1e2456"
   integrity sha512-wU9WPhay1zBxtdd/HLRYhFRLBbG9lw3YTBJep9sTnYwUeXiEgum4O88Q2j6cwBBPPHMgeMrKMPHS85Jf4hMc0g==
 
-"@vue/cli-service@^4.5.7":
+"@vue/cli-service@~4.5.8":
   version "4.5.8"
-  resolved "https://registry.yarnpkg.com/@vue/cli-service/-/cli-service-4.5.8.tgz#9fe58bc7c77c5121eabb940f80e06c18dab123ea"
-  integrity sha512-YcVEJvA5vQOcfRzhCQDfHxRW9WHvKqlQeiuSvNddfV2uQqKD3ifhsNYiZZuFvbev9qgRUmtmxSafpwYzj/LLBw==
+  resolved "https://registry.npm.taobao.org/@vue/cli-service/download/@vue/cli-service-4.5.8.tgz?cache=0&sync_timestamp=1603102515356&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40vue%2Fcli-service%2Fdownload%2F%40vue%2Fcli-service-4.5.8.tgz#9fe58bc7c77c5121eabb940f80e06c18dab123ea"
+  integrity sha1-n+WLx8d8USHqu5QPgOBsGNqxI+o=
   dependencies:
     "@intervolga/optimize-cssnano-plugin" "^1.0.5"
     "@soda/friendly-errors-webpack-plugin" "^1.7.1"

@@ -328,12 +328,17 @@
         <div class="layout-item">
             <p class="title">Select 下拉选择器</p>
             <div class="layout-item-body">
-                <ins-select v-model="selectValue">
+                <ins-select v-model="selectValue" placement="bottom">
                     <ins-option label="apple" value="apple"></ins-option>
                     <ins-option label="banana" value="banana"></ins-option>
                 </ins-select>
+                <ins-select v-model="selectValue" placement="bottom">
+                    <ins-option label="苹果" value="apple"></ins-option>
+                    <ins-option label="香蕉" value="banana"></ins-option>
+                </ins-select>
             </div>
         </div>
+        <div style="height: 50vh"></div>
     </div>
 </template>
 

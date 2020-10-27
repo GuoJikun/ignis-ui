@@ -365,8 +365,8 @@ function getWindowSizes(document) {
     };
 }
 
-var classCallCheck = function (ins-tance, Constructor) {
-    if (!(ins-tance ins-tanceof Constructor)) {
+var classCallCheck = function (instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
         throw new TypeError("Cannot call a class as a function");
     }
 };
